@@ -1,0 +1,6 @@
+
+$ bun run anchor-build && bun run codama:js
+$ cd anchor && anchor build
+/usr/bin/bash: line 1: anchor: command not found
+error: script "anchor-build" exited with code 127
+error: script "setup" exited with code 127

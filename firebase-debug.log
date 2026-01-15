@@ -1,0 +1,14 @@
+[debug] [2026-01-15T22:08:20.088Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-01-15T22:08:20.094Z] > authorizing via signed-in user (suhelk3003btechiot2026@kccitm.edu.in)
+[debug] [2026-01-15T22:08:20.094Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-01-15T22:08:20.095Z] > authorizing via signed-in user (suhelk3003btechiot2026@kccitm.edu.in)
+[debug] [2026-01-15T22:08:20.121Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-01-15T22:08:20.121Z] > authorizing via signed-in user (suhelk3003btechiot2026@kccitm.edu.in)
+[debug] [2026-01-15T22:08:20.343Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-01-15T22:08:20.343Z] > authorizing via signed-in user (suhelk3003btechiot2026@kccitm.edu.in)
+[debug] [2026-01-15T22:08:20.345Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-01-15T22:08:20.345Z] > authorizing via signed-in user (suhelk3003btechiot2026@kccitm.edu.in)
+[debug] [2026-01-15T22:08:20.486Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-01-15T22:08:20.486Z] > authorizing via signed-in user (suhelk3003btechiot2026@kccitm.edu.in)
+[debug] [2026-01-15T22:08:20.488Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-01-15T22:08:20.489Z] > authorizing via signed-in user (suhelk3003btechiot2026@kccitm.edu.in)
