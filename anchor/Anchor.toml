@@ -6,6 +6,7 @@ skip-lint = false
 
 [programs.devnet]
 vault = "F4jZpgbtTb6RWNWq6v35fUeiAsRJMrDczVPv9U23yXjB"
+prediction = "11111111111111111111111111111111"
 
 [registry]
 url = "https://api.apr.dev"
