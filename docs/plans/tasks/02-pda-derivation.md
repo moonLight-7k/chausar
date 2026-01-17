@@ -13,17 +13,17 @@ Define PDA seeds constants and helper functions for:
 - YES/NO mint PDAs
 
 ## Target Files
-- [ ] `anchor/programs/prediction/src/seeds.rs`
-- [ ] Update `anchor/programs/prediction/src/lib.rs` to include module
+- [x] `anchor/programs/prediction/src/seeds.rs`
+- [x] Update `anchor/programs/prediction/src/lib.rs` to include module
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
-- [ ] Create `src/seeds.rs` with seed constants
-- [ ] Define PDA derivation patterns
+- [x] Create `src/seeds.rs` with seed constants
+- [x] Define PDA derivation patterns
 
 ### 2. Green Phase
-- [ ] Implement seed constants:
+- [x] Implement seed constants:
 
 ```rust
 pub const MARKET_SEED: &[u8] = b"market";
@@ -34,17 +34,17 @@ pub const NO_MINT_SEED: &[u8] = b"no_mint";
 pub const LP_MINT_SEED: &[u8] = b"lp_mint";
 ```
 
-- [ ] Add module to lib.rs
+- [x] Add module to lib.rs
 
 ### 3. Refactor Phase
-- [ ] Add documentation for each seed constant
-- [ ] Verify consistent naming convention
-- [ ] Run `anchor build` to confirm compilation
+- [x] Add documentation for each seed constant
+- [x] Verify consistent naming convention
+- [x] Run `anchor build` to confirm compilation
 
 ## Completion Criteria
-- [ ] All seed constants defined and accessible
-- [ ] Operation verified: L3 (build succeeds)
-- [ ] Seeds match PRD specification
+- [x] All seed constants defined and accessible
+- [x] Operation verified: L3 (build succeeds)
+- [x] Seeds match PRD specification
 
 ## Notes
 - Impact scope: All instructions will use these seeds

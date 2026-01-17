@@ -561,13 +561,13 @@ pub fn claim_winnings(
 
 ## 11. Risks & Mitigations
 
-| Risk | Impact | Likelihood | Mitigation |
-|------|--------|------------|------------|
-| Oracle manipulation | High | Medium | Use 3-of-5 multisig, plan dispute mechanism for v2 |
-| Low liquidity kills markets | High | High | Set minimum liquidity requirement, incentivize LPs |
-| Smart contract bug | Critical | Low | Audit, testnet testing, start with low limits |
-| Poor UX → no adoption | High | Medium | User testing, clear error messages, tutorials |
-| Solana network congestion | Medium | Low | Implement retry logic, show clear pending states |
+| Risk                        | Impact   | Likelihood | Mitigation                                         |
+| --------------------------- | -------- | ---------- | -------------------------------------------------- |
+| Oracle manipulation         | High     | Medium     | Use 3-of-5 multisig, plan dispute mechanism for v2 |
+| Low liquidity kills markets | High     | High       | Set minimum liquidity requirement, incentivize LPs |
+| Smart contract bug          | Critical | Low        | Audit, testnet testing, start with low limits      |
+| Poor UX → no adoption       | High     | Medium     | User testing, clear error messages, tutorials      |
+| Solana network congestion   | Medium   | Low        | Implement retry logic, show clear pending states   |
 
 ---
 

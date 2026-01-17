@@ -2,8 +2,10 @@
 
 use anchor_lang::prelude::*;
 
+pub mod seeds;
 pub mod state;
 
+pub use seeds::*;
 pub use state::*;
 
 declare_id!("11111111111111111111111111111111");
