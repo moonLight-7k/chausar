@@ -41,3 +41,5 @@ target/
 *.pdb
 .anchor/
 
+*.log
+

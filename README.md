@@ -1,26 +1,22 @@
-# nextjs-anchor
+# Chausar
 
-Next.js starter with Tailwind CSS, `@solana/react-hooks`, and an Anchor vault program example.
+Decentralized prediction market on Solana. Create binary (Yes/No) markets, trade positions via AMM, and receive automatic payouts based on oracle-resolved outcomes.
+
+## Features
+
+- **Permissionless** - Anyone can create prediction markets
+- **Non-custodial** - Users control funds via wallet
+- **AMM-based** - Instant trading with constant product formula
+- **Automatic settlement** - Trustless payouts upon resolution
 
 ## Getting Started
 
-```shell
-npx -y create-solana-dapp@latest -t solana-foundation/templates/kit/nextjs-anchor
-```
-
-```shell
-npm install   # Builds program and generates client automatically
+```bash
+npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000), connect your wallet, and interact with the vault on devnet.
-
-## What's Included
-
-- **Wallet connection** via `@solana/react-hooks` with auto-discovery
-- **SOL Vault program** - deposit and withdraw SOL from a personal PDA vault
-- **Codama-generated client** - type-safe program interactions using `@solana/kit`
-- **Tailwind CSS v4** with light/dark mode
+Open [http://localhost:3000](http://localhost:3000) and connect your wallet.
 
 ## Stack
 
@@ -37,82 +33,62 @@ Open [http://localhost:3000](http://localhost:3000), connect your wallet, and in
 ```
 ├── app/
 │   ├── components/
-│   │   ├── providers.tsx      # Solana client setup
-│   │   └── vault-card.tsx     # Vault deposit/withdraw UI
-│   ├── generated/vault/       # Codama-generated program client
-│   └── page.tsx               # Main page
-├── anchor/                    # Anchor workspace
-│   └── programs/vault/        # Vault program (Rust)
-└── codama.json                # Codama client generation config
+│   │   └── providers.tsx        # Solana client setup
+│   ├── generated/prediction/    # Codama-generated program client
+│   └── page.tsx
+├── anchor/
+│   └── programs/prediction/     # Prediction market program (Rust)
+└── codama.json                  # Client generation config
 ```
 
-## Deploy Your Own Vault
+## Development
 
-The included vault program is already deployed to devnet. To deploy your own:
+```bash
+npm run dev              # Start Next.js dev server
+npm run build            # Production build
+npm run lint             # ESLint check
+npm run format           # Prettier format
+```
 
-### Prerequisites
+## Anchor Program
 
-- [Rust](https://rustup.rs/)
-- [Solana CLI](https://solana.com/docs/intro/installation)
-- [Anchor](https://www.anchor-lang.com/docs/installation)
+Requires [Rust](https://rustup.rs/), [Solana CLI](https://solana.com/docs/intro/installation), and [Anchor](https://www.anchor-lang.com/docs/installation).
 
-### Steps
+```bash
+npm run anchor-build     # Build program
+npm run anchor-test      # Run tests with LiteSVM
+npm run setup            # Build + regenerate TypeScript client
+```
 
-1. **Configure Solana CLI for devnet**
+## Deploying
 
+1. Configure Solana CLI for devnet:
    ```bash
    solana config set --url devnet
-   ```
-
-2. **Create a wallet (if needed) and fund it**
-
-   ```bash
-   solana-keygen new
    solana airdrop 2
    ```
 
-3. **Build and deploy the program**
-
+2. Build and deploy:
    ```bash
    cd anchor
    anchor build
-   anchor keys sync    # Updates program ID in source
-   anchor build        # Rebuild with new ID
+   anchor keys sync
+   anchor build
    anchor deploy
    cd ..
    ```
 
-4. **Regenerate the client and restart**
+3. Regenerate the client:
    ```bash
-   npm run setup   # Rebuilds program and regenerates client
-   npm run dev
+   npm run setup
    ```
 
-## Testing
+## Documentation
 
-Tests use [LiteSVM](https://github.com/LiteSVM/litesvm), a fast lightweight Solana VM for testing.
-
-```bash
-npm run anchor-build   # Build the program first
-npm run anchor-test    # Run tests
-```
-
-The tests are in `anchor/programs/vault/src/tests.rs` and automatically use the program ID from `declare_id!`.
-
-## Regenerating the Client
-
-If you modify the program, regenerate the TypeScript client:
-
-```bash
-npm run setup   # Or: npm run anchor-build && npm run codama:js
-```
-
-This uses [Codama](https://github.com/codama-idl/codama) to generate a type-safe client from the Anchor IDL.
+- [PRD.md](./PRD.md) - Product requirements and specifications
 
 ## Learn More
 
-- [Solana Docs](https://solana.com/docs) - core concepts and guides
-- [Anchor Docs](https://www.anchor-lang.com/docs) - program development framework
-- [Deploying Programs](https://solana.com/docs/programs/deploying) - deployment guide
-- [framework-kit](https://github.com/solana-foundation/framework-kit) - the React hooks used here
-- [Codama](https://github.com/codama-idl/codama) - client generation from IDL
+- [Solana Docs](https://solana.com/docs)
+- [Anchor Docs](https://www.anchor-lang.com/docs)
+- [Codama](https://github.com/codama-idl/codama)
