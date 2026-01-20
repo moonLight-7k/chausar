@@ -63,12 +63,14 @@ npm run setup            # Build + regenerate TypeScript client
 ## Deploying
 
 1. Configure Solana CLI for devnet:
+
    ```bash
    solana config set --url devnet
    solana airdrop 2
    ```
 
 2. Build and deploy:
+
    ```bash
    cd anchor
    anchor build

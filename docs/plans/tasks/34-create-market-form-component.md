@@ -1,12 +1,15 @@
 # Task: CreateMarketForm Component
 
 Metadata:
+
 - Dependencies: task-33 (AmountInput), task-19 (useMarkets for create function)
 - Provides: app/components/CreateMarketForm.tsx
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Create the market creation form component:
+
 - Question input (max 280 chars)
 - Description textarea (max 1000 chars)
 - End time datetime picker
@@ -17,15 +20,18 @@ Create the market creation form component:
 - Submit with transaction
 
 ## Target Files
+
 - [ ] `app/components/CreateMarketForm.tsx`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Define form data interface
 - [ ] Create component structure
 
 ### 2. Green Phase
+
 - [ ] Implement form component:
 
 ```typescript
@@ -337,11 +343,13 @@ export function CreateMarketForm() {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add form persistence (localStorage)
 - [ ] Improve validation messages
 - [ ] Add confirmation step before submission
 
 ## Completion Criteria
+
 - [ ] All form fields validate correctly
 - [ ] End time must be in future
 - [ ] Resolve time must be after end time
@@ -351,6 +359,7 @@ export function CreateMarketForm() {
 - [ ] Operation verified: L1 (functional form)
 
 ## Notes
+
 - Impact scope: Used in Create Market page
 - Constraints: Must match PRD validation requirements
 - Oracle defaults to user wallet if not specified

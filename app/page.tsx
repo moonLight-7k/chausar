@@ -1,69 +1,120 @@
 "use client";
 
-import { useWalletConnection } from "@solana/react-hooks";
+import Link from "next/link";
+import { Header } from "@/app/components/Header";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { TrendingUp, Zap, Shield } from "lucide-react";
 
 export default function Home() {
-  const { connectors, connect, disconnect, wallet, status } =
-    useWalletConnection();
-
-  const address = wallet?.account.address.toString();
-
   return (
-    <div className="min-h-screen bg-bg1 text-foreground">
-      <main className="mx-auto max-w-4xl px-6 py-16">
-        <header className="mb-10 space-y-2">
-          <h1 className="text-3xl font-semibold tracking-tight">
-            Prediction Market
-          </h1>
-          <p className="text-muted">
-            Create and trade on binary prediction markets.
-          </p>
-        </header>
-
-        <section className="rounded-2xl border border-border-low bg-card p-6">
-          <div className="flex items-center justify-between gap-4 mb-4">
-            <p className="text-lg font-semibold">Wallet</p>
-            <span className="rounded-full bg-cream px-3 py-1 text-xs font-semibold uppercase tracking-wide text-foreground/80">
-              {status === "connected" ? "Connected" : "Not connected"}
-            </span>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-2 mb-4">
-            {connectors.map((connector) => (
-              <button
-                key={connector.id}
-                onClick={() => connect(connector.id)}
-                disabled={status === "connecting"}
-                className="flex items-center justify-between rounded-xl border border-border-low bg-card px-4 py-3 text-left text-sm font-medium transition hover:-translate-y-0.5 hover:shadow-sm cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-20">
+        <div className="space-y-16">
+          {/* Hero */}
+          <div className="text-center space-y-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+              Decentralized
+              <br />
+              <span className="text-primary">Prediction Markets</span>
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Create binary markets, trade outcomes, and earn on your
+              predictions. Fully trustless, on-chain settlement powered by
+              Solana.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <Button
+                asChild
+                size="lg"
+                className="bg-yes text-white hover:bg-yes/90"
               >
-                <span className="flex flex-col">
-                  <span className="text-base">{connector.name}</span>
-                  <span className="text-xs text-muted">
-                    {status === "connecting"
-                      ? "Connecting..."
-                      : status === "connected" &&
-                          wallet?.connector.id === connector.id
-                        ? "Active"
-                        : "Tap to connect"}
-                  </span>
-                </span>
-              </button>
-            ))}
+                <Link href="/markets">Start Trading</Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href="/create">Create Market</Link>
+              </Button>
+            </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 border-t border-border-low pt-4 text-sm">
-            <span className="rounded-lg border border-border-low bg-cream px-3 py-2 font-mono text-xs">
-              {address ?? "No wallet connected"}
-            </span>
-            <button
-              onClick={() => disconnect()}
-              disabled={status !== "connected"}
-              className="inline-flex items-center gap-2 rounded-lg border border-border-low bg-card px-3 py-2 font-medium transition hover:-translate-y-0.5 hover:shadow-sm cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              Disconnect
-            </button>
+          {/* Features */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card className="hover:shadow-md hover:border-border-strong transition-all">
+              <CardHeader>
+                <div className="h-10 w-10 rounded-lg bg-yes-bg flex items-center justify-center mb-2">
+                  <TrendingUp className="h-5 w-5 text-yes" />
+                </div>
+                <CardTitle>Binary Markets</CardTitle>
+                <CardDescription>
+                  Simple YES/NO predictions. Easy to understand, quick to
+                  resolve.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="hover:shadow-md hover:border-border-strong transition-all">
+              <CardHeader>
+                <div className="h-10 w-10 rounded-lg bg-warning/20 flex items-center justify-center mb-2">
+                  <Zap className="h-5 w-5 text-warning" />
+                </div>
+                <CardTitle>Instant Trading</CardTitle>
+                <CardDescription>
+                  AMM-powered markets with instant execution and transparent
+                  pricing.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="hover:shadow-md hover:border-border-strong transition-all sm:col-span-2 lg:col-span-1">
+              <CardHeader>
+                <div className="h-10 w-10 rounded-lg bg-info/20 flex items-center justify-center mb-2">
+                  <Shield className="h-5 w-5 text-info" />
+                </div>
+                <CardTitle>Trustless Settlement</CardTitle>
+                <CardDescription>
+                  Smart contracts handle payouts automatically. No custody, no
+                  counterparty risk.
+                </CardDescription>
+              </CardHeader>
+            </Card>
           </div>
-        </section>
+
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-y border-border">
+            <div className="text-center">
+              <p className="text-3xl md:text-4xl font-bold font-mono text-primary">
+                $0
+              </p>
+              <p className="text-sm text-muted-foreground mt-1">Total Volume</p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl md:text-4xl font-bold font-mono text-primary">
+                0
+              </p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Active Markets
+              </p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl md:text-4xl font-bold font-mono text-primary">
+                0
+              </p>
+              <p className="text-sm text-muted-foreground mt-1">Traders</p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl md:text-4xl font-bold font-mono text-yes">
+                0.3%
+              </p>
+              <p className="text-sm text-muted-foreground mt-1">Trading Fee</p>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   );

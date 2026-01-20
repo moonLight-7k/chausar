@@ -1,27 +1,33 @@
 # Task: useTrade Hook
 
 Metadata:
+
 - Dependencies: task-19 (market hooks), task-17 (AMM utils)
 - Provides: app/hooks/useTrade.ts
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Create React hook for executing trade transactions:
+
 - Build and send trade transaction
 - Handle transaction confirmation
 - Calculate expected output and slippage
 
 ## Target Files
+
 - [ ] `app/hooks/useTrade.ts`
 - [ ] Update `app/hooks/index.ts`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Define hook interface
 - [ ] Identify transaction building requirements
 
 ### 2. Green Phase
+
 - [ ] Implement useTrade hook:
 
 ```typescript
@@ -85,7 +91,7 @@ export function useTrade(): UseTradeResult {
         const expectedOutput = calculateOutput(
           usdcAmount,
           inputReserve,
-          outputReserve
+          outputReserve,
         );
 
         // Calculate min output with slippage
@@ -103,7 +109,7 @@ export function useTrade(): UseTradeResult {
         // Send transaction
         const signature = await wallet.sendTransaction(
           [instruction],
-          client.rpc
+          client.rpc,
         );
 
         // Wait for confirmation
@@ -118,7 +124,7 @@ export function useTrade(): UseTradeResult {
         setIsLoading(false);
       }
     },
-    [client, wallet]
+    [client, wallet],
   );
 
   return { trade: executeTrade, isLoading, error };
@@ -132,11 +138,13 @@ export { useTrade } from "./useTrade";
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add proper account derivation
 - [ ] Add transaction simulation before send
 - [ ] Handle priority fees if needed
 
 ## Completion Criteria
+
 - [ ] Hook implemented with slippage protection
 - [ ] Calculates expected output
 - [ ] Handles errors gracefully
@@ -144,6 +152,7 @@ export { useTrade } from "./useTrade";
 - [ ] Operation verified: L3 (build succeeds)
 
 ## Notes
+
 - Uses AMM utilities for calculations
 - Default slippage is 5% (500 bps)
 - Wallet must be connected

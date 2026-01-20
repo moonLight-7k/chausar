@@ -1,15 +1,18 @@
 # Phase 2 Completion: Smart Contract Instructions
 
 Metadata:
+
 - Dependencies: task-04 through task-10
 - Size: Verification only
 
 ## Phase Summary
+
 Verify all instruction implementations for the prediction market smart contract.
 
 ## Verification Checklist
 
 ### Task Completions
+
 - [ ] Task 04: create_market instruction
 - [ ] Task 05: lock_market instruction
 - [ ] Task 06: resolve_market instruction
@@ -31,6 +34,7 @@ Verify all instruction implementations for the prediction market smart contract.
    - [ ] All PDA seeds used correctly
 
 3. **File Structure**
+
    ```
    anchor/programs/prediction/src/
    ├── lib.rs
@@ -55,6 +59,7 @@ Verify all instruction implementations for the prediction market smart contract.
    - [ ] Run `cd anchor && anchor test --skip-deploy`
 
 ## Completion Criteria
+
 - [ ] All instructions compile without errors
 - [ ] `anchor build` succeeds
 - [ ] Basic tests pass for each instruction

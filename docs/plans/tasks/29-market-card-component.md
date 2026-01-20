@@ -1,12 +1,15 @@
 # Task: MarketCard Component
 
 Metadata:
+
 - Dependencies: task-28 (MarketStatus), task-18 (formatters)
 - Provides: app/components/MarketCard.tsx
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Create a market summary card for the market list view showing:
+
 - Question text
 - YES/NO prices as bars
 - Time remaining
@@ -14,15 +17,18 @@ Create a market summary card for the market list view showing:
 - Status badge
 
 ## Target Files
+
 - [ ] `app/components/MarketCard.tsx`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Define MarketCard props interface
 - [ ] Create component structure
 
 ### 2. Green Phase
+
 - [ ] Implement market card component:
 
 ```typescript
@@ -119,11 +125,13 @@ export function MarketCard({ market, yesPrice, noPrice }: MarketCardProps) {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Improve visual hierarchy
 - [ ] Add hover animations
 - [ ] Ensure accessibility (keyboard nav, screen readers)
 
 ## Completion Criteria
+
 - [ ] Displays market question
 - [ ] Shows YES/NO price bars correctly
 - [ ] Shows time remaining or resolution status
@@ -132,6 +140,7 @@ export function MarketCard({ market, yesPrice, noPrice }: MarketCardProps) {
 - [ ] Operation verified: L1 (functional component)
 
 ## Notes
+
 - Impact scope: Used in Market List page
 - Constraints: Must handle all market status states
 - Price bars should visually represent probability

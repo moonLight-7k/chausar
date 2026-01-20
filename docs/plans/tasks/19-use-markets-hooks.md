@@ -1,16 +1,20 @@
 # Task: useMarkets and useMarket Hooks
 
 Metadata:
+
 - Dependencies: task-15 (client), task-16 (config)
 - Provides: app/hooks/useMarkets.ts, app/hooks/useMarket.ts
 - Size: Small (2 files)
 
 ## Implementation Content
+
 Create React hooks for fetching market data:
+
 - useMarkets: Fetch all markets
 - useMarket: Fetch single market by ID
 
 ## Target Files
+
 - [ ] `app/hooks/useMarkets.ts`
 - [ ] `app/hooks/useMarket.ts`
 - [ ] `app/hooks/index.ts`
@@ -18,10 +22,12 @@ Create React hooks for fetching market data:
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Define hook interfaces
 - [ ] Identify required RPC calls
 
 ### 2. Green Phase
+
 - [ ] Implement useMarkets hook:
 
 ```typescript
@@ -51,7 +57,7 @@ export function useMarkets(): UseMarketsResult {
     setError(null);
     try {
       const accounts = await fetchAllMarketAccounts(client.rpc);
-      setMarkets(accounts.map(a => a.data));
+      setMarkets(accounts.map((a) => a.data));
     } catch (e) {
       setError(e instanceof Error ? e : new Error("Failed to fetch markets"));
     } finally {
@@ -143,17 +149,20 @@ export { useMarket } from "./useMarket";
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add PDA helper utilities if needed
 - [ ] Add caching or SWR if desired
 - [ ] Verify hooks work with client
 
 ## Completion Criteria
+
 - [ ] Both hooks implemented
 - [ ] Handles loading and error states
 - [ ] Build passes
 - [ ] Operation verified: L3 (build succeeds)
 
 ## Notes
+
 - Uses generated client from Codama
 - Fetches pool data alongside market
 - Supports refetching for updates

@@ -1,27 +1,33 @@
 # Task: useLiquidity Hook
 
 Metadata:
+
 - Dependencies: task-19 (market hooks), task-17 (AMM utils)
 - Provides: app/hooks/useLiquidity.ts
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Create React hook for liquidity operations:
+
 - Add liquidity transaction
 - Remove liquidity transaction
 - Calculate LP tokens and withdrawals
 
 ## Target Files
+
 - [ ] `app/hooks/useLiquidity.ts`
 - [ ] Update `app/hooks/index.ts`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Define hook interface
 - [ ] Identify transaction requirements
 
 ### 2. Green Phase
+
 - [ ] Implement useLiquidity hook:
 
 ```typescript
@@ -87,7 +93,7 @@ export function useLiquidity(): UseLiquidityResult {
         const expectedLpTokens = calculateLpTokens(
           usdcAmount,
           params.poolUsdcReserve,
-          params.totalLpSupply
+          params.totalLpSupply,
         );
 
         // Build transaction
@@ -100,7 +106,7 @@ export function useLiquidity(): UseLiquidityResult {
         // Send transaction
         const signature = await wallet.sendTransaction(
           [instruction],
-          client.rpc
+          client.rpc,
         );
 
         await client.rpc.confirmTransaction(signature);
@@ -114,7 +120,7 @@ export function useLiquidity(): UseLiquidityResult {
         setIsLoading(false);
       }
     },
-    [client, wallet]
+    [client, wallet],
   );
 
   const removeLiquidity = useCallback(
@@ -134,7 +140,7 @@ export function useLiquidity(): UseLiquidityResult {
           lpAmount,
           params.poolUsdcReserve,
           params.poolTokenReserve,
-          params.totalLpSupply
+          params.totalLpSupply,
         );
 
         // Build transaction
@@ -147,7 +153,7 @@ export function useLiquidity(): UseLiquidityResult {
         // Send transaction
         const signature = await wallet.sendTransaction(
           [instruction],
-          client.rpc
+          client.rpc,
         );
 
         await client.rpc.confirmTransaction(signature);
@@ -162,7 +168,7 @@ export function useLiquidity(): UseLiquidityResult {
         setIsLoading(false);
       }
     },
-    [client, wallet]
+    [client, wallet],
   );
 
   return { addLiquidity, removeLiquidity, isLoading, error };
@@ -176,11 +182,13 @@ export { useLiquidity } from "./useLiquidity";
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add preview functions for UI
 - [ ] Handle associated token account creation
 - [ ] Verify transaction building
 
 ## Completion Criteria
+
 - [ ] Both add/remove functions implemented
 - [ ] Calculates expected LP tokens
 - [ ] Handles errors gracefully
@@ -188,6 +196,7 @@ export { useLiquidity } from "./useLiquidity";
 - [ ] Operation verified: L3 (build succeeds)
 
 ## Notes
+
 - Uses AMM utilities for calculations
 - Creates token accounts if needed
 - Returns LP tokens on add, USDC+tokens on remove

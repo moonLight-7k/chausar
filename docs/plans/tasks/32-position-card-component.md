@@ -1,12 +1,15 @@
 # Task: PositionCard Component
 
 Metadata:
+
 - Dependencies: task-28 (MarketStatus), task-18 (formatters)
 - Provides: app/components/PositionCard.tsx
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Create a position display card showing:
+
 - Market question
 - Position side (YES/NO)
 - Token balance
@@ -15,15 +18,18 @@ Create a position display card showing:
 - Profit/loss indicator
 
 ## Target Files
+
 - [ ] `app/components/PositionCard.tsx`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Define Position interface
 - [ ] Create component structure
 
 ### 2. Green Phase
+
 - [ ] Implement position card component:
 
 ```typescript
@@ -164,11 +170,13 @@ export function PositionRow({ position }: PositionRowProps) {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add hover effects
 - [ ] Improve value formatting
 - [ ] Add loading skeleton variant
 
 ## Completion Criteria
+
 - [ ] Displays position information correctly
 - [ ] Color coding for YES/NO
 - [ ] Shows current value
@@ -177,6 +185,7 @@ export function PositionRow({ position }: PositionRowProps) {
 - [ ] Operation verified: L1 (functional component)
 
 ## Notes
+
 - Impact scope: Used in Portfolio page
 - Constraints: Must handle various market statuses
 - Should be visually distinct for YES vs NO positions

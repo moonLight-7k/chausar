@@ -1,17 +1,21 @@
 # Task: Form Input Components (AmountInput, PriceDisplay, SlippageSettings)
 
 Metadata:
+
 - Dependencies: task-18 (formatters)
 - Provides: app/components/AmountInput.tsx, app/components/PriceDisplay.tsx, app/components/SlippageSettings.tsx
 - Size: Small (3 files)
 
 ## Implementation Content
+
 Create shared form input components:
+
 - AmountInput: USDC amount input with validation
 - PriceDisplay: YES/NO price display with visual bar
 - SlippageSettings: Slippage tolerance configuration
 
 ## Target Files
+
 - [ ] `app/components/AmountInput.tsx`
 - [ ] `app/components/PriceDisplay.tsx`
 - [ ] `app/components/SlippageSettings.tsx`
@@ -19,12 +23,14 @@ Create shared form input components:
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Define component interfaces
 - [ ] Create file structure
 
 ### 2. Green Phase
 
 #### AmountInput Component
+
 ```typescript
 // app/components/AmountInput.tsx
 "use client";
@@ -122,6 +128,7 @@ export function AmountInput({
 ```
 
 #### PriceDisplay Component
+
 ```typescript
 // app/components/PriceDisplay.tsx
 interface PriceDisplayProps {
@@ -222,6 +229,7 @@ export function PriceInline({ yesPrice, noPrice }: PriceInlineProps) {
 ```
 
 #### SlippageSettings Component
+
 ```typescript
 // app/components/SlippageSettings.tsx
 "use client";
@@ -332,11 +340,13 @@ export function SlippageSettings({
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add input validation feedback
 - [ ] Ensure consistent styling
 - [ ] Add accessibility attributes
 
 ## Completion Criteria
+
 - [ ] AmountInput validates numeric input
 - [ ] PriceDisplay shows correct percentages
 - [ ] SlippageSettings persists selection
@@ -345,6 +355,7 @@ export function SlippageSettings({
 - [ ] Operation verified: L1 (functional components)
 
 ## Notes
+
 - Impact scope: Used across TradingPanel, LiquidityPanel, forms
 - Constraints: Must handle edge cases (0, negative, very large numbers)
 - AmountInput should support max 6 decimal places for USDC

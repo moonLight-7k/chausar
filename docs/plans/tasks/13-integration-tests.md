@@ -1,25 +1,31 @@
 # Task: Integration Tests
 
 Metadata:
+
 - Dependencies: task-12 (instruction unit tests)
 - Provides: End-to-end flow test coverage
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Write integration tests for complete user flows:
+
 - Create market -> trade -> resolve -> claim
 - Add liquidity -> trade -> remove liquidity
 
 ## Target Files
+
 - [ ] `anchor/programs/prediction/tests/integration.rs`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Write full lifecycle test
 - [ ] Write liquidity provider flow test
 
 ### 2. Green Phase
+
 - [ ] Implement full market lifecycle test:
 
 ```rust
@@ -102,17 +108,20 @@ async fn test_liquidity_provider_flow() {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add more complex scenarios (multiple traders)
 - [ ] Test edge cases in flows
 - [ ] Ensure proper cleanup between tests
 
 ## Completion Criteria
+
 - [ ] Full lifecycle test passes
 - [ ] Liquidity flow test passes
 - [ ] Tests verify all state transitions
 - [ ] Operation verified: L2 (tests pass)
 
 ## Notes
+
 - These tests validate end-to-end behavior
 - Use real-ish amounts (100 USDC, etc.)
 - Verify balances change correctly

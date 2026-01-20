@@ -1,27 +1,33 @@
 # Task: usePortfolio Hook
 
 Metadata:
+
 - Dependencies: task-19 (market hooks)
 - Provides: app/hooks/usePortfolio.ts
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Create React hook for fetching user portfolio:
+
 - Active positions (YES/NO token balances per market)
 - LP positions (LP token balances per pool)
 - Claimable winnings (resolved markets with winning tokens)
 
 ## Target Files
+
 - [ ] `app/hooks/usePortfolio.ts`
 - [ ] Update `app/hooks/index.ts`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Define portfolio data structure
 - [ ] Identify required token account queries
 
 ### 2. Green Phase
+
 - [ ] Implement usePortfolio hook:
 
 ```typescript
@@ -30,8 +36,16 @@ Create React hook for fetching user portfolio:
 
 import { useEffect, useState, useCallback } from "react";
 import { useSolanaClient, useWalletConnection } from "@solana/react-hooks";
-import { fetchAllMarketAccounts, fetchPoolAccount } from "@/generated/prediction";
-import type { Market, Pool, MarketStatus, MarketResult } from "@/generated/prediction";
+import {
+  fetchAllMarketAccounts,
+  fetchPoolAccount,
+} from "@/generated/prediction";
+import type {
+  Market,
+  Pool,
+  MarketStatus,
+  MarketResult,
+} from "@/generated/prediction";
 
 interface Position {
   marketId: bigint;
@@ -104,14 +118,14 @@ export function usePortfolio(): UsePortfolioResult {
         const yesBalance = await getTokenBalance(
           client.rpc,
           walletAddress,
-          market.yesMint
+          market.yesMint,
         );
 
         // Get user's NO token balance
         const noBalance = await getTokenBalance(
           client.rpc,
           walletAddress,
-          market.noMint
+          market.noMint,
         );
 
         if (yesBalance > 0n || noBalance > 0n) {
@@ -150,7 +164,8 @@ export function usePortfolio(): UsePortfolioResult {
         totalValue: calculateTotalValue(positions, lpPositions),
       });
     } catch (e) {
-      const err = e instanceof Error ? e : new Error("Failed to fetch portfolio");
+      const err =
+        e instanceof Error ? e : new Error("Failed to fetch portfolio");
       setError(err);
     } finally {
       setIsLoading(false);
@@ -168,7 +183,7 @@ export function usePortfolio(): UsePortfolioResult {
 async function getTokenBalance(
   rpc: any,
   owner: string,
-  mint: string
+  mint: string,
 ): Promise<bigint> {
   // Implementation using getTokenAccountsByOwner
   return 0n; // placeholder
@@ -176,7 +191,7 @@ async function getTokenBalance(
 
 function calculateTotalValue(
   positions: Position[],
-  lpPositions: LpPosition[]
+  lpPositions: LpPosition[],
 ): bigint {
   // Sum up estimated values
   return 0n; // placeholder
@@ -190,11 +205,13 @@ export { usePortfolio } from "./usePortfolio";
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Optimize with batched RPC calls
 - [ ] Add value estimation logic
 - [ ] Cache results appropriately
 
 ## Completion Criteria
+
 - [ ] Portfolio data structure complete
 - [ ] Fetches all user positions
 - [ ] Identifies claimable winnings
@@ -202,6 +219,7 @@ export { usePortfolio } from "./usePortfolio";
 - [ ] Operation verified: L3 (build succeeds)
 
 ## Notes
+
 - Only fetches for connected wallet
 - Groups positions by market
 - Calculates estimated value

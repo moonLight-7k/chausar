@@ -1,27 +1,33 @@
 # Task: Navigation Component
 
 Metadata:
+
 - Dependencies: task-16 (provider config)
 - Provides: app/components/Navigation.tsx
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Create the main navigation component with:
+
 - Header with app logo/name
 - Navigation links (Markets, Create, Portfolio)
 - Wallet connect button integration
 - Responsive mobile menu
 
 ## Target Files
+
 - [ ] `app/components/Navigation.tsx`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Create component file structure
 - [ ] Define navigation link types
 
 ### 2. Green Phase
+
 - [ ] Implement navigation component:
 
 ```typescript
@@ -141,11 +147,13 @@ export function Navigation() {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add active link highlighting
 - [ ] Improve mobile responsiveness
 - [ ] Add animation for mobile menu
 
 ## Completion Criteria
+
 - [ ] Navigation renders with all links
 - [ ] Wallet connect/disconnect works
 - [ ] Mobile menu toggles correctly
@@ -153,6 +161,7 @@ export function Navigation() {
 - [ ] Operation verified: L1 (functional component)
 
 ## Notes
+
 - Impact scope: Used in app/layout.tsx
 - Constraints: Must work with @solana/react-hooks wallet
 - Should be added to layout for all pages

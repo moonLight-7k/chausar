@@ -1,26 +1,32 @@
 # Task: Portfolio Page
 
 Metadata:
+
 - Dependencies: task-22 (usePortfolio), task-31 (PositionCard)
 - Provides: app/portfolio/page.tsx
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Create the portfolio page displaying:
+
 - Active positions (YES/NO token balances)
 - LP positions
 - Claimable winnings with claim buttons
 
 ## Target Files
+
 - [ ] `app/portfolio/page.tsx`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Create page structure
 - [ ] Define portfolio sections
 
 ### 2. Green Phase
+
 - [ ] Implement portfolio page:
 
 ```typescript
@@ -171,11 +177,13 @@ export default function PortfolioPage() {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add claim success/error feedback
 - [ ] Add position value estimation
 - [ ] Improve loading states
 
 ## Completion Criteria
+
 - [ ] Shows positions for connected wallet
 - [ ] Claim button works for winnings
 - [ ] Shows LP positions
@@ -183,6 +191,7 @@ export default function PortfolioPage() {
 - [ ] Operation verified: L1 (functional page)
 
 ## Notes
+
 - Requires wallet connection
 - Displays claimable winnings prominently
 - Uses PositionCard component

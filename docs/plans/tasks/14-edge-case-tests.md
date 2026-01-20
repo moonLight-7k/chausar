@@ -1,12 +1,15 @@
 # Task: Edge Case and Access Control Tests
 
 Metadata:
+
 - Dependencies: task-13 (integration tests)
 - Provides: Comprehensive edge case coverage
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Test edge cases and security scenarios:
+
 - Zero liquidity handling
 - Dust amount handling
 - Maximum slippage scenarios
@@ -14,15 +17,18 @@ Test edge cases and security scenarios:
 - Double-resolution prevention
 
 ## Target Files
+
 - [ ] `anchor/programs/prediction/tests/edge_cases.rs`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Identify all edge cases from PRD
 - [ ] Write failing tests for each
 
 ### 2. Green Phase
+
 - [ ] Implement edge case tests:
 
 ```rust
@@ -104,17 +110,20 @@ mod math_safety_tests {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Group related tests
 - [ ] Add clear failure message expectations
 - [ ] Run all tests and ensure pass
 
 ## Completion Criteria
+
 - [ ] All edge cases tested
 - [ ] Access control verified
 - [ ] Math safety verified
 - [ ] Operation verified: L2 (tests pass)
 
 ## Notes
+
 - Focus on security-critical paths
 - Test both boundaries (min and max values)
 - Verify error messages match expectations

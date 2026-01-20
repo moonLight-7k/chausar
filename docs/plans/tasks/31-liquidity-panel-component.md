@@ -1,12 +1,15 @@
 # Task: LiquidityPanel Component
 
 Metadata:
+
 - Dependencies: task-21 (useLiquidity), task-33 (AmountInput)
 - Provides: app/components/LiquidityPanel.tsx
 - Size: Small (1-2 files)
 
 ## Implementation Content
+
 Create the liquidity management interface:
+
 - Add/Remove liquidity tabs
 - Pool selection (YES/NO)
 - Amount input
@@ -15,15 +18,18 @@ Create the liquidity management interface:
 - Add/Remove buttons with transaction execution
 
 ## Target Files
+
 - [ ] `app/components/LiquidityPanel.tsx`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Define LiquidityPanel props
 - [ ] Create component structure
 
 ### 2. Green Phase
+
 - [ ] Implement liquidity panel component:
 
 ```typescript
@@ -269,11 +275,13 @@ export function LiquidityPanel({
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add loading states
 - [ ] Improve error handling
 - [ ] Add confirmation step for large removals
 
 ## Completion Criteria
+
 - [ ] Add/Remove mode toggle works
 - [ ] Pool selection works
 - [ ] LP token calculations correct
@@ -282,6 +290,7 @@ export function LiquidityPanel({
 - [ ] Operation verified: L1 (functional component)
 
 ## Notes
+
 - Impact scope: Used in Market Detail page
 - Constraints: Requires wallet connection
 - Should show user's LP balance for remove mode

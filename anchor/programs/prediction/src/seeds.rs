@@ -104,6 +104,53 @@ pub const NO_MINT_SEED: &[u8] = b"no_mint";
 /// ```
 pub const LP_MINT_SEED: &[u8] = b"lp_mint";
 
+/// Seed prefix for Vault Authority PDA derivation
+///
+/// Used with market pubkey to derive the authority that controls the USDC vault.
+/// This PDA signs transfers from the vault during claim_winnings.
+///
+/// # Example
+/// ```ignore
+/// let (vault_authority_pda, bump) = Pubkey::find_program_address(
+///     &[VAULT_AUTHORITY_SEED, market_pubkey.as_ref()],
+///     &program_id,
+/// );
+/// ```
+pub const VAULT_AUTHORITY_SEED: &[u8] = b"vault_authority";
+
+/// Seed prefix for YES Mint Authority PDA derivation
+///
+/// Used with market pubkey to derive the mint authority for YES tokens.
+pub const YES_MINT_AUTHORITY_SEED: &[u8] = b"yes_mint_authority";
+
+/// Seed prefix for NO Mint Authority PDA derivation
+///
+/// Used with market pubkey to derive the mint authority for NO tokens.
+pub const NO_MINT_AUTHORITY_SEED: &[u8] = b"no_mint_authority";
+
+/// Seed prefix for YES LP Mint Authority PDA derivation
+///
+/// Used with market pubkey to derive the mint authority for YES LP tokens.
+pub const YES_LP_MINT_AUTHORITY_SEED: &[u8] = b"yes_lp_mint_authority";
+
+/// Seed prefix for NO LP Mint Authority PDA derivation
+///
+/// Used with market pubkey to derive the mint authority for NO LP tokens.
+pub const NO_LP_MINT_AUTHORITY_SEED: &[u8] = b"no_lp_mint_authority";
+
+/// Seed prefix for Claim Record PDA derivation
+///
+/// Used with market pubkey and user pubkey to track claims and prevent double-claiming.
+///
+/// # Example
+/// ```ignore
+/// let (claim_record_pda, bump) = Pubkey::find_program_address(
+///     &[CLAIM_SEED, market_pubkey.as_ref(), user_pubkey.as_ref()],
+///     &program_id,
+/// );
+/// ```
+pub const CLAIM_SEED: &[u8] = b"claim";
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -111,13 +158,19 @@ mod tests {
     #[test]
     fn test_seed_constants_are_unique() {
         // Verify all seed constants are unique to prevent PDA collisions
-        let seeds: [&[u8]; 6] = [
+        let seeds: [&[u8]; 12] = [
             MARKET_SEED,
             POOL_SEED,
             VAULT_SEED,
             YES_MINT_SEED,
             NO_MINT_SEED,
             LP_MINT_SEED,
+            VAULT_AUTHORITY_SEED,
+            YES_MINT_AUTHORITY_SEED,
+            NO_MINT_AUTHORITY_SEED,
+            YES_LP_MINT_AUTHORITY_SEED,
+            NO_LP_MINT_AUTHORITY_SEED,
+            CLAIM_SEED,
         ];
 
         for i in 0..seeds.len() {
@@ -140,6 +193,27 @@ mod tests {
         assert!(!YES_MINT_SEED.is_empty(), "YES_MINT_SEED must not be empty");
         assert!(!NO_MINT_SEED.is_empty(), "NO_MINT_SEED must not be empty");
         assert!(!LP_MINT_SEED.is_empty(), "LP_MINT_SEED must not be empty");
+        assert!(
+            !VAULT_AUTHORITY_SEED.is_empty(),
+            "VAULT_AUTHORITY_SEED must not be empty"
+        );
+        assert!(
+            !YES_MINT_AUTHORITY_SEED.is_empty(),
+            "YES_MINT_AUTHORITY_SEED must not be empty"
+        );
+        assert!(
+            !NO_MINT_AUTHORITY_SEED.is_empty(),
+            "NO_MINT_AUTHORITY_SEED must not be empty"
+        );
+        assert!(
+            !YES_LP_MINT_AUTHORITY_SEED.is_empty(),
+            "YES_LP_MINT_AUTHORITY_SEED must not be empty"
+        );
+        assert!(
+            !NO_LP_MINT_AUTHORITY_SEED.is_empty(),
+            "NO_LP_MINT_AUTHORITY_SEED must not be empty"
+        );
+        assert!(!CLAIM_SEED.is_empty(), "CLAIM_SEED must not be empty");
     }
 
     #[test]
@@ -151,5 +225,11 @@ mod tests {
         assert_eq!(YES_MINT_SEED, b"yes_mint");
         assert_eq!(NO_MINT_SEED, b"no_mint");
         assert_eq!(LP_MINT_SEED, b"lp_mint");
+        assert_eq!(VAULT_AUTHORITY_SEED, b"vault_authority");
+        assert_eq!(YES_MINT_AUTHORITY_SEED, b"yes_mint_authority");
+        assert_eq!(NO_MINT_AUTHORITY_SEED, b"no_mint_authority");
+        assert_eq!(YES_LP_MINT_AUTHORITY_SEED, b"yes_lp_mint_authority");
+        assert_eq!(NO_LP_MINT_AUTHORITY_SEED, b"no_lp_mint_authority");
+        assert_eq!(CLAIM_SEED, b"claim");
     }
 }

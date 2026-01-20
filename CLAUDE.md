@@ -40,6 +40,7 @@ npm run codama:js        # Regenerate TypeScript client from IDL
 ### Client Generation Flow
 
 When you modify the Anchor program:
+
 1. `npm run anchor-build` - Compiles Rust, generates IDL at `anchor/target/idl/`
 2. `npm run codama:js` - Codama reads IDL, outputs TypeScript client to `app/generated/`
 

@@ -1,26 +1,32 @@
 # Task: MarketStatus Component
 
 Metadata:
+
 - Dependencies: task-15 (client generation - for enum types)
 - Provides: app/components/MarketStatus.tsx
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Create a status badge component displaying market status:
+
 - Open (green) - Trading active
 - Locked (yellow) - Awaiting resolution
 - Resolved (blue/gray) - Outcome determined
 
 ## Target Files
+
 - [ ] `app/components/MarketStatus.tsx`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Define status types matching contract enums
 - [ ] Create component structure
 
 ### 2. Green Phase
+
 - [ ] Implement status badge component:
 
 ```typescript
@@ -110,11 +116,13 @@ export function MarketResult({ result, size = "md" }: MarketResultProps) {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Ensure consistent styling with design system
 - [ ] Add optional icon support
 - [ ] Verify enum handling from generated client
 
 ## Completion Criteria
+
 - [ ] Renders correct badge for each status
 - [ ] Handles Codama enum objects correctly
 - [ ] Size variants work
@@ -122,6 +130,7 @@ export function MarketResult({ result, size = "md" }: MarketResultProps) {
 - [ ] Operation verified: L1 (functional component)
 
 ## Notes
+
 - Impact scope: Used in MarketCard, Market Detail page
 - Constraints: Must handle Codama-generated enum format
 - The status enum from Codama may be `{ Open: {} }` format

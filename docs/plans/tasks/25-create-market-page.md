@@ -1,27 +1,33 @@
 # Task: Create Market Page
 
 Metadata:
+
 - Dependencies: task-16 (config), task-31 (CreateMarketForm)
 - Provides: app/create/page.tsx
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Create the market creation page with:
+
 - Market creation form
 - Initial liquidity input
 - Oracle address input
 - Form validation and submission
 
 ## Target Files
+
 - [ ] `app/create/page.tsx`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Create page structure
 - [ ] Define form requirements
 
 ### 2. Green Phase
+
 - [ ] Implement create market page:
 
 ```typescript
@@ -100,11 +106,13 @@ export default function CreateMarketPage() {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add USDC balance check
 - [ ] Improve form validation feedback
 - [ ] Add loading state during creation
 
 ## Completion Criteria
+
 - [ ] Page renders form when connected
 - [ ] Shows connect prompt when disconnected
 - [ ] Redirects to market on success
@@ -112,6 +120,7 @@ export default function CreateMarketPage() {
 - [ ] Operation verified: L1 (functional page)
 
 ## Notes
+
 - Requires wallet connection
 - Minimum 100 USDC liquidity
 - Uses CreateMarketForm component

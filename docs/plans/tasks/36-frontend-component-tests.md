@@ -1,12 +1,15 @@
 # Task: Frontend Component Tests
 
 Metadata:
+
 - Dependencies: task-27 through task-34 (all components)
 - Provides: Component test suite
 - Size: Medium (3-5 files)
 
 ## Implementation Content
+
 Create component tests for core frontend components:
+
 - Navigation component tests
 - MarketCard component tests
 - TradingPanel component tests
@@ -14,6 +17,7 @@ Create component tests for core frontend components:
 - Test utilities and mocks
 
 ## Target Files
+
 - [ ] `app/__tests__/components/Navigation.test.tsx`
 - [ ] `app/__tests__/components/MarketCard.test.tsx`
 - [ ] `app/__tests__/components/TradingPanel.test.tsx`
@@ -23,12 +27,14 @@ Create component tests for core frontend components:
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Set up testing infrastructure
 - [ ] Create test utilities and mocks
 
 ### 2. Green Phase
 
 #### Test Utilities
+
 ```typescript
 // app/__tests__/utils/test-utils.tsx
 import { ReactNode } from "react";
@@ -90,6 +96,7 @@ export { customRender as render, mockWalletContext, mockConnectedWalletContext }
 ```
 
 #### Navigation Tests
+
 ```typescript
 // app/__tests__/components/Navigation.test.tsx
 import { describe, it, expect, vi } from "vitest";
@@ -152,6 +159,7 @@ describe("Navigation", () => {
 ```
 
 #### MarketCard Tests
+
 ```typescript
 // app/__tests__/components/MarketCard.test.tsx
 import { describe, it, expect } from "vitest";
@@ -265,6 +273,7 @@ describe("MarketCard", () => {
 ```
 
 #### TradingPanel Tests
+
 ```typescript
 // app/__tests__/components/TradingPanel.test.tsx
 import { describe, it, expect, vi } from "vitest";
@@ -348,6 +357,7 @@ describe("TradingPanel", () => {
 ```
 
 #### Form Components Tests
+
 ```typescript
 // app/__tests__/components/FormComponents.test.tsx
 import { describe, it, expect, vi } from "vitest";
@@ -443,11 +453,13 @@ describe("SlippageSettings", () => {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add more edge case tests
 - [ ] Improve mock setup
 - [ ] Add snapshot tests where appropriate
 
 ## Completion Criteria
+
 - [ ] All component tests pass
 - [ ] Test coverage meets 80% for components
 - [ ] Mocks properly isolate components
@@ -455,6 +467,7 @@ describe("SlippageSettings", () => {
 - [ ] Operation verified: L2 (test verification)
 
 ## Notes
+
 - Impact scope: Validates all frontend components
 - Constraints: Must mock wallet and hooks properly
 - Use Vitest and Testing Library

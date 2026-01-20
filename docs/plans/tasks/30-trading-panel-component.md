@@ -1,12 +1,15 @@
 # Task: TradingPanel Component
 
 Metadata:
+
 - Dependencies: task-20 (useTrade), task-33 (AmountInput)
 - Provides: app/components/TradingPanel.tsx
 - Size: Small (1-2 files)
 
 ## Implementation Content
+
 Create the trading interface for buying YES/NO tokens:
+
 - YES/NO side selection tabs
 - Amount input in USDC
 - Price impact display
@@ -15,15 +18,18 @@ Create the trading interface for buying YES/NO tokens:
 - Buy button with transaction execution
 
 ## Target Files
+
 - [ ] `app/components/TradingPanel.tsx`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Define TradingPanel props
 - [ ] Create component structure with tabs
 
 ### 2. Green Phase
+
 - [ ] Implement trading panel component:
 
 ```typescript
@@ -213,11 +219,13 @@ export function TradingPanel({
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add loading skeleton states
 - [ ] Improve error messaging
 - [ ] Add price impact warning for high slippage
 
 ## Completion Criteria
+
 - [ ] Side selection works
 - [ ] Amount input updates calculations
 - [ ] Price impact calculated correctly
@@ -226,6 +234,7 @@ export function TradingPanel({
 - [ ] Operation verified: L1 (functional component)
 
 ## Notes
+
 - Impact scope: Used in Market Detail page
 - Constraints: Requires wallet connection for trading
 - Should show price impact warnings for > 5%

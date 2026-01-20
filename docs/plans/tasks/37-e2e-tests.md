@@ -1,12 +1,15 @@
 # Task: End-to-End Tests
 
 Metadata:
+
 - Dependencies: All phases 1-8 complete
 - Provides: E2E test suite
 - Size: Medium (3-5 files)
 
 ## Implementation Content
+
 Create E2E tests for complete user flows:
+
 - Create market flow
 - Trade flow (buy YES/NO)
 - Liquidity flow (add/remove)
@@ -14,6 +17,7 @@ Create E2E tests for complete user flows:
 - Portfolio view flow
 
 ## Target Files
+
 - [ ] `e2e/market-creation.spec.ts`
 - [ ] `e2e/trading.spec.ts`
 - [ ] `e2e/liquidity.spec.ts`
@@ -23,12 +27,14 @@ Create E2E tests for complete user flows:
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Set up Playwright or Cypress
 - [ ] Configure test environment for devnet
 
 ### 2. Green Phase
 
 #### E2E Configuration
+
 ```typescript
 // playwright.config.ts
 import { defineConfig } from "@playwright/test";
@@ -59,6 +65,7 @@ export default defineConfig({
 ```
 
 #### Market Creation E2E Test
+
 ```typescript
 // e2e/market-creation.spec.ts
 import { test, expect } from "@playwright/test";
@@ -87,7 +94,9 @@ test.describe("Market Creation", () => {
 
     // Set valid times
     const tomorrow = new Date(Date.now() + 86400000).toISOString().slice(0, 16);
-    const nextWeek = new Date(Date.now() + 604800000).toISOString().slice(0, 16);
+    const nextWeek = new Date(Date.now() + 604800000)
+      .toISOString()
+      .slice(0, 16);
 
     await page.locator('input[type="datetime-local"]').first().fill(tomorrow);
     await page.locator('input[type="datetime-local"]').last().fill(nextWeek);
@@ -103,11 +112,17 @@ test.describe("Market Creation", () => {
     // This test requires a connected wallet with devnet USDC
     test.skip(!process.env.TEST_WALLET_CONNECTED, "Requires wallet connection");
 
-    await page.getByPlaceholder(/Will Bitcoin/).fill("Will BTC reach $100k by end of 2026?");
-    await page.getByPlaceholder(/Additional details/).fill("Based on CoinGecko price at 00:00 UTC");
+    await page
+      .getByPlaceholder(/Will Bitcoin/)
+      .fill("Will BTC reach $100k by end of 2026?");
+    await page
+      .getByPlaceholder(/Additional details/)
+      .fill("Based on CoinGecko price at 00:00 UTC");
 
     const tomorrow = new Date(Date.now() + 86400000).toISOString().slice(0, 16);
-    const nextWeek = new Date(Date.now() + 604800000).toISOString().slice(0, 16);
+    const nextWeek = new Date(Date.now() + 604800000)
+      .toISOString()
+      .slice(0, 16);
 
     await page.locator('input[type="datetime-local"]').first().fill(tomorrow);
     await page.locator('input[type="datetime-local"]').last().fill(nextWeek);
@@ -122,6 +137,7 @@ test.describe("Market Creation", () => {
 ```
 
 #### Trading E2E Test
+
 ```typescript
 // e2e/trading.spec.ts
 import { test, expect } from "@playwright/test";
@@ -161,7 +177,9 @@ test.describe("Trading", () => {
   });
 
   test("shows connect wallet prompt when disconnected", async ({ page }) => {
-    await expect(page.getByRole("button", { name: "Connect Wallet" })).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Connect Wallet" }),
+    ).toBeVisible();
   });
 
   test("full trade flow", async ({ page }) => {
@@ -174,12 +192,15 @@ test.describe("Trading", () => {
     await expect(page.getByText(/Trading|Confirming/)).toBeVisible();
 
     // Wait for transaction
-    await page.waitForSelector('[data-testid="trade-success"]', { timeout: 30000 });
+    await page.waitForSelector('[data-testid="trade-success"]', {
+      timeout: 30000,
+    });
   });
 });
 ```
 
 #### Liquidity E2E Test
+
 ```typescript
 // e2e/liquidity.spec.ts
 import { test, expect } from "@playwright/test";
@@ -223,12 +244,15 @@ test.describe("Liquidity", () => {
 
     await page.getByRole("button", { name: "Add Liquidity" }).click();
 
-    await page.waitForSelector('[data-testid="liquidity-success"]', { timeout: 30000 });
+    await page.waitForSelector('[data-testid="liquidity-success"]', {
+      timeout: 30000,
+    });
   });
 });
 ```
 
 #### Portfolio E2E Test
+
 ```typescript
 // e2e/portfolio.spec.ts
 import { test, expect } from "@playwright/test";
@@ -262,6 +286,7 @@ test.describe("Portfolio", () => {
 ```
 
 #### Claim Winnings E2E Test
+
 ```typescript
 // e2e/claim-winnings.spec.ts
 import { test, expect } from "@playwright/test";
@@ -280,7 +305,9 @@ test.describe("Claim Winnings", () => {
     await page.getByRole("button", { name: "Claim" }).first().click();
 
     // Wait for transaction
-    await page.waitForSelector('[data-testid="claim-success"]', { timeout: 30000 });
+    await page.waitForSelector('[data-testid="claim-success"]', {
+      timeout: 30000,
+    });
 
     // Position should be removed from claimable
     await expect(page.getByText("No claimable winnings")).toBeVisible();
@@ -289,11 +316,13 @@ test.describe("Claim Winnings", () => {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add visual regression tests
 - [ ] Add mobile viewport tests
 - [ ] Improve test reliability
 
 ## Completion Criteria
+
 - [ ] All E2E tests pass locally
 - [ ] Tests work with devnet
 - [ ] CI/CD integration configured
@@ -301,6 +330,7 @@ test.describe("Claim Winnings", () => {
 - [ ] Operation verified: L1 (functional flows)
 
 ## Notes
+
 - Impact scope: Validates complete user journeys
 - Constraints: Requires devnet deployment for full testing
 - Some tests require wallet connection and test tokens

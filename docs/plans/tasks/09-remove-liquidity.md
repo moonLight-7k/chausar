@@ -1,29 +1,35 @@
 # Task: remove_liquidity Instruction
 
 Metadata:
+
 - Dependencies: task-08 (add_liquidity)
 - Provides: anchor/programs/prediction/src/instructions/remove_liquidity.rs
 - Size: Small (1-2 files)
 
 ## Implementation Content
+
 Implement the `remove_liquidity` instruction that:
+
 - Validates LP token balance
 - Calculates proportional USDC + position tokens to return
 - Burns LP tokens
 - Transfers assets to user
 
 ## Target Files
+
 - [ ] `anchor/programs/prediction/src/instructions/remove_liquidity.rs`
 - [ ] Update `anchor/programs/prediction/src/instructions/mod.rs`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Write test: add liquidity then remove
 - [ ] Write test: partial removal
 - [ ] Verify tests fail
 
 ### 2. Green Phase
+
 - [ ] Implement withdrawal calculation:
 
 ```rust
@@ -98,17 +104,20 @@ pub struct RemoveLiquidity<'info> {
   - Update pool reserves
 
 ### 3. Refactor Phase
+
 - [ ] Handle edge case: removing all liquidity
 - [ ] Ensure rounding favors the pool
 - [ ] Run tests and confirm they pass
 
 ## Completion Criteria
+
 - [ ] remove_liquidity instruction compiles
 - [ ] Test passes: correct amounts returned
 - [ ] Test passes: LP tokens burned
 - [ ] Operation verified: L2 (tests pass)
 
 ## Notes
+
 - Impact scope: Enables LP withdrawal
 - Constraints: Cannot remove more than balance
 - Returns both USDC and position tokens proportionally

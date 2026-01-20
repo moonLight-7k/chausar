@@ -1,27 +1,33 @@
 # Task: Market Detail Page
 
 Metadata:
+
 - Dependencies: task-19 (useMarket), task-29 (TradingPanel), task-30 (LiquidityPanel)
 - Provides: app/markets/[id]/page.tsx
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Create the market detail page with:
+
 - Full market information display
 - Trading panel (YES/NO)
 - Liquidity panel (add/remove)
 - Price display and status indicator
 
 ## Target Files
+
 - [ ] `app/markets/[id]/page.tsx`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Create dynamic route structure
 - [ ] Define page layout
 
 ### 2. Green Phase
+
 - [ ] Implement market detail page:
 
 ```typescript
@@ -174,11 +180,13 @@ export default function MarketDetailPage({ params }: PageProps) {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add error boundary
 - [ ] Improve layout responsiveness
 - [ ] Add claim button for resolved markets
 
 ## Completion Criteria
+
 - [ ] Page displays market info
 - [ ] Trading panel visible for open markets
 - [ ] Liquidity panel visible for open markets
@@ -186,6 +194,7 @@ export default function MarketDetailPage({ params }: PageProps) {
 - [ ] Operation verified: L1 (functional page)
 
 ## Notes
+
 - Dynamic route with [id] parameter
 - Shows different content based on market status
 - Depends on TradingPanel and LiquidityPanel components

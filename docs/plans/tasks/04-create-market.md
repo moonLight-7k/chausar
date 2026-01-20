@@ -1,18 +1,22 @@
 # Task: create_market Instruction
 
 Metadata:
+
 - Dependencies: task-01, task-02, task-03 (Phase 1 completion)
 - Provides: anchor/programs/prediction/src/instructions/create_market.rs
 - Size: Medium (3-4 files)
 
 ## Implementation Content
+
 Implement the `create_market` instruction that:
+
 - Creates a new prediction market with initial liquidity
 - Initializes YES/NO token mints
 - Initializes YES/NO pools with liquidity
 - Creates USDC vault for the market
 
 ## Target Files
+
 - [ ] `anchor/programs/prediction/src/instructions/mod.rs`
 - [ ] `anchor/programs/prediction/src/instructions/create_market.rs`
 - [ ] Update `anchor/programs/prediction/src/lib.rs`
@@ -20,12 +24,14 @@ Implement the `create_market` instruction that:
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Create instructions module structure
 - [ ] Define CreateMarket context with all required accounts
 - [ ] Write test that calls create_market with valid parameters
 - [ ] Verify test fails (instruction not implemented)
 
 ### 2. Green Phase
+
 - [ ] Implement CreateMarket accounts struct:
 
 ```rust
@@ -143,16 +149,19 @@ pub struct CreateMarket<'info> {
   - Mint initial LP tokens to creator
 
 ### 3. Refactor Phase
+
 - [ ] Extract validation logic to helper functions
 - [ ] Add comprehensive error messages
 - [ ] Run test and confirm it passes
 
 ## Completion Criteria
+
 - [ ] create_market instruction compiles
 - [ ] Test passes: market created with correct fields
 - [ ] Operation verified: L2 (test passes)
 
 ## Notes
+
 - Impact scope: Foundation for all market operations
 - Constraints: Minimum 100 USDC liquidity
 - Initial pools should have equal USDC, so YES/NO prices start at 50%

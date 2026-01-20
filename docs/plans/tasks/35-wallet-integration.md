@@ -1,12 +1,15 @@
 # Task: Enhanced Wallet Integration
 
 Metadata:
+
 - Dependencies: task-27 (Navigation component)
 - Provides: Enhanced wallet connection with persistence
 - Size: Small (2-3 files)
 
 ## Implementation Content
+
 Enhance wallet integration with:
+
 - Wallet connection persistence across sessions
 - Support for multiple wallets (Phantom, Solflare)
 - Display connected wallet address
@@ -14,6 +17,7 @@ Enhance wallet integration with:
 - Auto-reconnect on page load
 
 ## Target Files
+
 - [ ] `app/components/providers.tsx` (update)
 - [ ] `app/lib/wallet.ts` (new)
 - [ ] `app/hooks/useWallet.ts` (new utility hook)
@@ -21,12 +25,14 @@ Enhance wallet integration with:
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Review existing wallet setup in providers.tsx
 - [ ] Define wallet persistence requirements
 
 ### 2. Green Phase
 
 #### Wallet Utility Functions
+
 ```typescript
 // app/lib/wallet.ts
 const WALLET_STORAGE_KEY = "chausar_connected_wallet";
@@ -91,6 +97,7 @@ export function truncateAddress(address: string, chars = 4): string {
 ```
 
 #### Enhanced Wallet Hook
+
 ```typescript
 // app/hooks/useWallet.ts
 "use client";
@@ -116,7 +123,12 @@ export interface UseWalletReturn {
 }
 
 export function useWallet(): UseWalletReturn {
-  const { wallet, status, connect: baseConnect, disconnect: baseDisconnect } = useWalletConnection();
+  const {
+    wallet,
+    status,
+    connect: baseConnect,
+    disconnect: baseDisconnect,
+  } = useWalletConnection();
   const [error, setError] = useState<Error | null>(null);
   const [walletName, setWalletName] = useState<string | null>(null);
 
@@ -152,7 +164,8 @@ export function useWallet(): UseWalletReturn {
     try {
       await baseConnect();
     } catch (e) {
-      const error = e instanceof Error ? e : new Error("Failed to connect wallet");
+      const error =
+        e instanceof Error ? e : new Error("Failed to connect wallet");
       setError(error);
       throw error;
     }
@@ -179,6 +192,7 @@ export function useWallet(): UseWalletReturn {
 ```
 
 #### Update Providers (if needed)
+
 ```typescript
 // app/components/providers.tsx - ensure proper configuration
 "use client";
@@ -208,11 +222,13 @@ export function Providers({ children }: ProvidersProps) {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add error boundary for wallet errors
 - [ ] Add reconnection retry logic
 - [ ] Improve error messages
 
 ## Completion Criteria
+
 - [ ] Wallet connection persists across page refreshes
 - [ ] Phantom wallet connects successfully
 - [ ] Solflare wallet connects successfully
@@ -222,6 +238,7 @@ export function Providers({ children }: ProvidersProps) {
 - [ ] Operation verified: L1 (functional wallet)
 
 ## Notes
+
 - Impact scope: Used by all components requiring wallet
 - Constraints: Must work with @solana/react-hooks
 - LocalStorage used for persistence (7-day expiry)

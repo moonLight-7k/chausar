@@ -7,18 +7,22 @@ Target Plan Document: docs/todo.md
 ## Project Overview
 
 ### Purpose and Goals
+
 Implement a decentralized prediction market on Solana where users can:
+
 - Create binary (Yes/No) prediction markets with initial liquidity
 - Trade YES/NO tokens via constant product AMM
 - Provide/remove liquidity and earn trading fees
 - Claim winnings after oracle resolution
 
 ### Background and Context
+
 The existing codebase has a simple vault program that will be replaced with the prediction market logic. The frontend has basic wallet connection infrastructure using @solana/react-hooks.
 
 ## Task Division Design
 
 ### Division Policy
+
 - **Horizontal Slice for Smart Contract**: Foundation first (accounts, PDAs) then instructions
 - **Vertical Slice for Frontend**: Feature-complete pages with components
 - **Verifiability**: L2 (test verification) for smart contract, L1 (functional operation) for frontend
@@ -118,22 +122,23 @@ Phase 10: Deployment
 
 ### Task Summary by Phase
 
-| Phase | Tasks | Description |
-|-------|-------|-------------|
-| Phase 1 | 01-03 | Smart Contract Foundation |
-| Phase 2 | 04-10 | Smart Contract Instructions |
-| Phase 3 | 11-14 | Smart Contract Testing |
-| Phase 4 | 15 | Client Generation |
-| Phase 5 | 16-22 | Frontend Infrastructure |
-| Phase 6 | 23-26 | Frontend Pages |
-| Phase 7 | 27-34 | Frontend Components |
-| Phase 8 | 35 | Wallet Integration |
-| Phase 9 | 36-37 | Quality Assurance |
-| Phase 10 | 38 | Deployment |
+| Phase    | Tasks | Description                 |
+| -------- | ----- | --------------------------- |
+| Phase 1  | 01-03 | Smart Contract Foundation   |
+| Phase 2  | 04-10 | Smart Contract Instructions |
+| Phase 3  | 11-14 | Smart Contract Testing      |
+| Phase 4  | 15    | Client Generation           |
+| Phase 5  | 16-22 | Frontend Infrastructure     |
+| Phase 6  | 23-26 | Frontend Pages              |
+| Phase 7  | 27-34 | Frontend Components         |
+| Phase 8  | 35    | Wallet Integration          |
+| Phase 9  | 36-37 | Quality Assurance           |
+| Phase 10 | 38    | Deployment                  |
 
 **Total Tasks: 38**
 
 ### Common Processing Points
+
 - **PDA Seeds**: Shared constants across instructions (seeds.rs)
 - **AMM Calculations**: Shared utility for price/output calculations
 - **Error Types**: Centralized error definitions
@@ -142,12 +147,14 @@ Phase 10: Deployment
 ## Implementation Considerations
 
 ### Principles to Maintain Throughout
+
 1. Use TDD (Red-Green-Refactor) for all smart contract code
 2. Follow Anchor best practices for account validation
 3. Use generated TypeScript client - do not manually edit app/generated/
 4. Maintain consistent error handling patterns
 
 ### Risks and Countermeasures
+
 - Risk: AMM calculation precision issues
   Countermeasure: Use u128 for intermediate calculations, extensive unit tests
 
@@ -158,11 +165,13 @@ Phase 10: Deployment
   Countermeasure: Always regenerate client after instruction changes
 
 ### Impact Scope Management
+
 - Allowed change scope: anchor/programs/prediction/, app/, docs/
 - No-change areas: External dependencies, anchor configuration patterns
 - Replace existing vault program with prediction market program
 
 ### Existing Code to Replace
+
 - `anchor/programs/vault/` - Will be replaced by `anchor/programs/prediction/`
 - `app/generated/vault/` - Will be replaced by `app/generated/prediction/`
 

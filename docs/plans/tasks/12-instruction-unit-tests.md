@@ -1,12 +1,15 @@
 # Task: Instruction Unit Tests
 
 Metadata:
+
 - Dependencies: Phase 2 completion (all instructions)
 - Provides: Individual instruction test coverage
 - Size: Medium (1 file with multiple test modules)
 
 ## Implementation Content
+
 Write unit tests for each instruction:
+
 - create_market validation tests
 - lock_market timing tests
 - resolve_market access control tests
@@ -15,15 +18,18 @@ Write unit tests for each instruction:
 - claim_winnings payout tests
 
 ## Target Files
+
 - [ ] `anchor/programs/prediction/src/tests.rs` (or tests/ directory)
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Set up test harness with LiteSVM
 - [ ] Create test utilities for common setup
 
 ### 2. Green Phase
+
 - [ ] Implement test setup:
 
 ```rust
@@ -111,17 +117,20 @@ mod tests {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Extract common setup to helper functions
 - [ ] Add assertions for all account state changes
 - [ ] Run all tests and ensure pass
 
 ## Completion Criteria
+
 - [ ] Each instruction has at least 2 tests (success + failure)
 - [ ] All tests pass
 - [ ] Test coverage > 80%
 - [ ] Operation verified: L2 (tests pass)
 
 ## Notes
+
 - Use LiteSVM for fast local testing
 - Mock USDC mint for testing
 - Test both happy path and error cases

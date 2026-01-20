@@ -1,29 +1,35 @@
 # Task: add_liquidity Instruction
 
 Metadata:
+
 - Dependencies: task-04 (create_market), task-07 (trade - for AMM utils)
 - Provides: anchor/programs/prediction/src/instructions/add_liquidity.rs
 - Size: Small (1-2 files)
 
 ## Implementation Content
+
 Implement the `add_liquidity` instruction that:
+
 - Validates market is Open
 - Calculates LP tokens to mint proportionally
 - Transfers USDC from user to pool
 - Mints LP tokens to user
 
 ## Target Files
+
 - [ ] `anchor/programs/prediction/src/instructions/add_liquidity.rs`
 - [ ] Update `anchor/programs/prediction/src/instructions/mod.rs`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Write test: add liquidity to existing pool
 - [ ] Write test: LP token calculation is proportional
 - [ ] Verify tests fail
 
 ### 2. Green Phase
+
 - [ ] Implement LP token calculation:
 
 ```rust
@@ -93,16 +99,19 @@ pub struct AddLiquidity<'info> {
   - Update pool.total_lp_supply
 
 ### 3. Refactor Phase
+
 - [ ] Ensure proper rounding (round down LP tokens)
 - [ ] Run tests and confirm they pass
 
 ## Completion Criteria
+
 - [ ] add_liquidity instruction compiles
 - [ ] Test passes: LP tokens minted correctly
 - [ ] Test passes: pool reserves updated
 - [ ] Operation verified: L2 (tests pass)
 
 ## Notes
+
 - Impact scope: Enables liquidity provision
 - Constraints: Market must be Open
 - LP calculation: proportional to existing pool share

@@ -1,28 +1,34 @@
 # Task: Market List Page
 
 Metadata:
+
 - Dependencies: task-19 (useMarkets hook), task-28 (MarketCard component)
 - Provides: app/markets/page.tsx
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Create the market list page displaying all markets:
+
 - Grid of market cards
 - Sorting options (ending soon, volume, newest)
 - Basic search/filter functionality
 - Loading and empty states
 
 ## Target Files
+
 - [ ] `app/markets/page.tsx`
 - [ ] `app/markets/layout.tsx` (optional)
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Create page file structure
 - [ ] Define component interface
 
 ### 2. Green Phase
+
 - [ ] Implement market list page:
 
 ```typescript
@@ -158,11 +164,13 @@ export default function MarketsPage() {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Extract filter components
 - [ ] Add skeleton loading states
 - [ ] Improve responsive design
 
 ## Completion Criteria
+
 - [ ] Page renders market list
 - [ ] Sorting works correctly
 - [ ] Search filters markets
@@ -170,6 +178,7 @@ export default function MarketsPage() {
 - [ ] Operation verified: L1 (functional page)
 
 ## Notes
+
 - Uses useMarkets hook for data
 - Depends on MarketCard component
 - Shows loading/error/empty states

@@ -1,12 +1,15 @@
 # Task: trade Instruction
 
 Metadata:
+
 - Dependencies: task-04 (create_market)
 - Provides: anchor/programs/prediction/src/instructions/trade.rs
 - Size: Medium (2-3 files)
 
 ## Implementation Content
+
 Implement the `trade` instruction that:
+
 - Validates market is Open
 - Calculates output using constant product formula
 - Deducts 0.3% fee before swap
@@ -14,6 +17,7 @@ Implement the `trade` instruction that:
 - Transfers USDC to pool, mints tokens to user
 
 ## Target Files
+
 - [ ] `anchor/programs/prediction/src/instructions/trade.rs`
 - [ ] `anchor/programs/prediction/src/utils/amm.rs` (calculation helpers)
 - [ ] Update `anchor/programs/prediction/src/instructions/mod.rs`
@@ -21,13 +25,15 @@ Implement the `trade` instruction that:
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Write AMM calculation unit tests first:
-  - Test constant product formula: dy = (y * dx) / (x + dx)
-  - Test fee deduction: amount_after_fee = amount * 997 / 1000
+  - Test constant product formula: dy = (y \* dx) / (x + dx)
+  - Test fee deduction: amount_after_fee = amount \* 997 / 1000
 - [ ] Write trade integration test
 - [ ] Verify tests fail
 
 ### 2. Green Phase
+
 - [ ] Implement AMM calculation functions:
 
 ```rust
@@ -106,11 +112,13 @@ pub struct Trade<'info> {
   - Update collected_fees
 
 ### 3. Refactor Phase
+
 - [ ] Extract AMM logic to separate utility module
 - [ ] Add slippage protection checks
 - [ ] Run tests and confirm they pass
 
 ## Completion Criteria
+
 - [ ] trade instruction compiles
 - [ ] AMM calculation tests pass
 - [ ] Trade integration test passes
@@ -118,7 +126,8 @@ pub struct Trade<'info> {
 - [ ] Operation verified: L2 (tests pass)
 
 ## Notes
+
 - Impact scope: Core trading functionality
 - Constraints: Cannot trade on Locked/Resolved markets
 - Fee: 0.3% (30 bps) deducted from input
-- Formula: dy = (y * dx * 997) / (x * 1000 + dx * 997)
+- Formula: dy = (y _ dx _ 997) / (x _ 1000 + dx _ 997)

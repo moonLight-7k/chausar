@@ -1,28 +1,34 @@
 # Task: AMM Utilities (Frontend)
 
 Metadata:
+
 - Dependencies: task-16 (config)
 - Provides: app/lib/amm.ts
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Create frontend utilities for AMM price calculations:
+
 - Calculate output amount for given input
 - Calculate current prices (YES/NO)
 - Calculate price impact
 - Calculate LP token amounts
 
 ## Target Files
+
 - [ ] `app/lib/amm.ts`
 - [ ] `app/lib/__tests__/amm.test.ts` (optional)
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Define function signatures
 - [ ] Write unit tests for calculations
 
 ### 2. Green Phase
+
 - [ ] Implement AMM utilities:
 
 ```typescript
@@ -37,7 +43,7 @@ export function calculateOutput(
   inputAmount: bigint,
   inputReserve: bigint,
   outputReserve: bigint,
-  feeBps: number = CONFIG.feeBps
+  feeBps: number = CONFIG.feeBps,
 ): bigint {
   const feeFactor = BigInt(10000 - feeBps);
   const amountWithFee = inputAmount * feeFactor;
@@ -52,7 +58,7 @@ export function calculateOutput(
  */
 export function calculateYesPrice(
   yesUsdcReserve: bigint,
-  noUsdcReserve: bigint
+  noUsdcReserve: bigint,
 ): number {
   const total = yesUsdcReserve + noUsdcReserve;
   if (total === 0n) return 0.5;
@@ -64,7 +70,7 @@ export function calculateYesPrice(
  */
 export function calculateNoPrice(
   yesUsdcReserve: bigint,
-  noUsdcReserve: bigint
+  noUsdcReserve: bigint,
 ): number {
   return 1 - calculateYesPrice(yesUsdcReserve, noUsdcReserve);
 }
@@ -76,12 +82,16 @@ export function calculateNoPrice(
 export function calculatePriceImpact(
   inputAmount: bigint,
   inputReserve: bigint,
-  outputReserve: bigint
+  outputReserve: bigint,
 ): number {
   const spotPrice = Number(outputReserve) / Number(inputReserve);
-  const outputAmount = calculateOutput(inputAmount, inputReserve, outputReserve);
+  const outputAmount = calculateOutput(
+    inputAmount,
+    inputReserve,
+    outputReserve,
+  );
   const effectivePrice = Number(outputAmount) / Number(inputAmount);
-  const impact = (spotPrice - effectivePrice) / spotPrice * 100;
+  const impact = ((spotPrice - effectivePrice) / spotPrice) * 100;
   return Math.abs(impact);
 }
 
@@ -91,7 +101,7 @@ export function calculatePriceImpact(
 export function calculateLpTokens(
   usdcAmount: bigint,
   poolUsdcReserve: bigint,
-  totalLpSupply: bigint
+  totalLpSupply: bigint,
 ): bigint {
   if (totalLpSupply === 0n) {
     return usdcAmount; // First LP
@@ -106,7 +116,7 @@ export function calculateWithdrawal(
   lpAmount: bigint,
   poolUsdcReserve: bigint,
   poolTokenReserve: bigint,
-  totalLpSupply: bigint
+  totalLpSupply: bigint,
 ): { usdcOut: bigint; tokensOut: bigint } {
   const usdcOut = (lpAmount * poolUsdcReserve) / totalLpSupply;
   const tokensOut = (lpAmount * poolTokenReserve) / totalLpSupply;
@@ -115,17 +125,20 @@ export function calculateWithdrawal(
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add input validation
 - [ ] Add error handling for edge cases
 - [ ] Run tests if created
 
 ## Completion Criteria
+
 - [ ] All calculation functions implemented
 - [ ] Matches smart contract logic
 - [ ] Build passes
 - [ ] Operation verified: L3 (build succeeds)
 
 ## Notes
+
 - Use bigint for precision with token amounts
 - Must match smart contract AMM logic exactly
 - These utilities will be used by hooks and components

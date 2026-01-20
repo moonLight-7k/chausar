@@ -1,27 +1,33 @@
 # Task: Formatter Utilities
 
 Metadata:
+
 - Dependencies: task-16 (config)
 - Provides: app/lib/formatters.ts
 - Size: Small (1 file)
 
 ## Implementation Content
+
 Create formatting utilities for display:
+
 - Price formatting (percentage, currency)
 - Time formatting (countdown, date)
 - Amount formatting (token amounts with decimals)
 - Address formatting (truncation)
 
 ## Target Files
+
 - [ ] `app/lib/formatters.ts`
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Define function signatures
 - [ ] Identify formatting requirements
 
 ### 2. Green Phase
+
 - [ ] Implement formatters:
 
 ```typescript
@@ -33,7 +39,7 @@ Create formatting utilities for display:
  */
 export function formatTokenAmount(
   amount: bigint | number,
-  decimals: number = 6
+  decimals: number = 6,
 ): string {
   const value = typeof amount === "bigint" ? Number(amount) : amount;
   const divisor = Math.pow(10, decimals);
@@ -119,17 +125,20 @@ export function formatCompactNumber(value: number): string {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add locale support if needed
 - [ ] Test edge cases (zero, negative, very large)
 - [ ] Build and verify
 
 ## Completion Criteria
+
 - [ ] All formatters implemented
 - [ ] Handles edge cases gracefully
 - [ ] Build passes
 - [ ] Operation verified: L3 (build succeeds)
 
 ## Notes
+
 - Use for consistent display across app
 - All timestamps are Unix seconds
 - Token amounts use 6 decimals (USDC standard)

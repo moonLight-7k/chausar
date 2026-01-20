@@ -6,6 +6,9 @@ pub const MAX_QUESTION_LEN: usize = 280;
 /// Maximum length for market description (1000 characters)
 pub const MAX_DESCRIPTION_LEN: usize = 1000;
 
+/// Minimum initial liquidity in USDC (100 USDC with 6 decimals)
+pub const MIN_INITIAL_LIQUIDITY: u64 = 100_000_000;
+
 /// Status of a prediction market
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq, Default)]
 pub enum MarketStatus {
@@ -113,6 +116,21 @@ pub struct Market {
 
     /// PDA bump seed
     pub bump: u8,
+
+    /// Vault authority PDA bump
+    pub vault_authority_bump: u8,
+
+    /// YES mint authority PDA bump
+    pub yes_mint_authority_bump: u8,
+
+    /// NO mint authority PDA bump
+    pub no_mint_authority_bump: u8,
+
+    /// YES LP mint authority PDA bump
+    pub yes_lp_mint_authority_bump: u8,
+
+    /// NO LP mint authority PDA bump
+    pub no_lp_mint_authority_bump: u8,
 }
 
 impl Market {
@@ -134,7 +152,12 @@ impl Market {
         + 1                      // result
         + 8                      // total_liquidity
         + 8                      // created_at
-        + 1; // bump
+        + 1                      // bump
+        + 1                      // vault_authority_bump
+        + 1                      // yes_mint_authority_bump
+        + 1                      // no_mint_authority_bump
+        + 1                      // yes_lp_mint_authority_bump
+        + 1;                     // no_lp_mint_authority_bump
 }
 
 /// Pool account storing AMM pool data for YES or NO side
@@ -193,4 +216,45 @@ impl Pool {
         + 2                     // fee_bps
         + 8                     // collected_fees
         + 1; // bump
+}
+
+/// Claim record to prevent double claims
+///
+/// This PDA is created when a user claims winnings for a market.
+/// If the account already exists, the user has already claimed.
+///
+/// Space calculation:
+/// - discriminator: 8 bytes
+/// - market: 32 bytes (Pubkey)
+/// - user: 32 bytes (Pubkey)
+/// - amount_claimed: 8 bytes (u64)
+/// - claimed_at: 8 bytes (i64)
+/// - bump: 1 byte (u8)
+/// Total: 89 bytes
+#[account]
+pub struct ClaimRecord {
+    /// Market for which the claim was made
+    pub market: Pubkey,
+
+    /// User who made the claim
+    pub user: Pubkey,
+
+    /// Amount of USDC claimed
+    pub amount_claimed: u64,
+
+    /// Timestamp of claim
+    pub claimed_at: i64,
+
+    /// PDA bump seed
+    pub bump: u8,
+}
+
+impl ClaimRecord {
+    /// Space required for ClaimRecord account (including discriminator)
+    pub const SPACE: usize = 8  // discriminator
+        + 32                    // market
+        + 32                    // user
+        + 8                     // amount_claimed
+        + 8                     // claimed_at
+        + 1;                    // bump
 }

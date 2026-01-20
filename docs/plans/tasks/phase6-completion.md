@@ -1,15 +1,18 @@
 # Phase 6 Completion: Frontend Pages
 
 Metadata:
+
 - Dependencies: task-23 through task-26
 - Size: Verification only
 
 ## Phase Summary
+
 Verify all frontend pages are implemented and functional.
 
 ## Verification Checklist
 
 ### Task Completions
+
 - [ ] Task 23: Market List Page
 - [ ] Task 24: Market Detail Page
 - [ ] Task 25: Create Market Page
@@ -36,6 +39,7 @@ Verify all frontend pages are implemented and functional.
    - [ ] Portfolio shows user positions
 
 4. **File Structure**
+
    ```
    app/
    ├── markets/
@@ -54,6 +58,7 @@ Verify all frontend pages are implemented and functional.
    - [ ] Forms are usable on mobile
 
 ## Completion Criteria
+
 - [ ] All pages render without errors
 - [ ] Build passes
 - [ ] Navigation works between pages

@@ -3,12 +3,15 @@
 ## Overview
 
 ### One-line Summary
+
 A trustless, permissionless prediction market on Solana where users can create binary (Yes/No) markets, trade positions via AMM, and receive automatic payouts based on oracle-resolved outcomes.
 
 ### Background
+
 Current prediction markets either require custody of funds, impose KYC/geographical restrictions, or rely on centralized entities for settlement. Chausar addresses these pain points by leveraging Solana's high-speed, low-cost blockchain to provide a fully decentralized alternative where users maintain control of their funds, markets are transparent, and settlements are automatic via smart contracts.
 
 **Core Value Proposition:**
+
 - No custody - users control funds via wallet
 - No KYC/geographical restrictions
 - Automatic settlement via smart contracts
@@ -19,16 +22,19 @@ Current prediction markets either require custody of funds, impose KYC/geographi
 ### Primary Users
 
 #### Persona 1: Market Creator
+
 - Wants to create prediction markets on topics they care about
 - Willing to provide initial liquidity
 - Expects fair oracle resolution
 
 #### Persona 2: Trader
+
 - Wants to bet on outcomes
 - Expects clear pricing and instant execution
 - Wants to withdraw winnings without friction
 
 #### Persona 3: Liquidity Provider
+
 - Wants to earn fees from trading activity
 - Willing to take on market-making risk
 - Expects transparent LP token accounting
@@ -36,6 +42,7 @@ Current prediction markets either require custody of funds, impose KYC/geographi
 ### User Stories
 
 **Market Creator:**
+
 ```
 As a Market Creator
 I want to create a binary prediction market with initial liquidity
@@ -43,6 +50,7 @@ So that I can enable trading on topics I believe will attract interest
 ```
 
 **Trader:**
+
 ```
 As a Trader
 I want to buy YES or NO tokens based on my prediction
@@ -50,6 +58,7 @@ So that I can profit if my prediction is correct
 ```
 
 **Liquidity Provider:**
+
 ```
 As a Liquidity Provider
 I want to deposit funds into market pools
@@ -195,21 +204,25 @@ flowchart TB
 ## Non-Functional Requirements
 
 ### Performance
+
 - **Response Time**: Page load < 2 seconds; transaction confirmation < 1 second (Solana block time)
 - **Throughput**: Support 100+ concurrent users
 - **Transaction Cost**: < $0.01 per trade
 
 ### Reliability
+
 - **Availability**: 99.9% uptime (dependent on Solana network)
 - **Error Rate**: < 1% transaction failure rate
 - **Retry Logic**: Automatic retry on network congestion
 
 ### Security
+
 - **Access Control**: Only oracle can resolve markets; only LP token holders can remove liquidity
 - **Validation**: All timestamps validated; slippage checks on trades; prevent double-resolution
 - **Economic Security**: Minimum 100 USDC liquidity; maximum 5% default slippage
 
 ### Scalability
+
 - **Market Capacity**: Unlimited markets (each is independent account)
 - **User Capacity**: No limit on concurrent users (constrained by Solana network)
 
@@ -218,14 +231,17 @@ flowchart TB
 ### Technology Stack
 
 **Blockchain:**
+
 - Solana mainnet
 - Anchor framework for smart contracts
 
 **Smart Contracts:**
+
 - Rust/Anchor program for core logic
 - SPL Token program for YES/NO tokens
 
 **Frontend:**
+
 - React 19 + TypeScript
 - @solana/kit - Core Solana primitives
 - @solana/client - RPC client
@@ -234,6 +250,7 @@ flowchart TB
 - Codama-generated TypeScript client from Anchor IDL
 
 **Backend (Optional for MVP):**
+
 - Simple indexer for market discovery
 - Could be replaced by on-chain queries initially
 
@@ -254,6 +271,7 @@ flowchart TB
 ### Core Data Models
 
 **Market Account:**
+
 ```rust
 pub struct Market {
     pub id: u64,                    // Unique market ID
@@ -294,6 +312,7 @@ pub enum MarketResult {
 ```
 
 **Pool Account:**
+
 ```rust
 pub struct Pool {
     pub market: Pubkey,             // Parent market
@@ -329,6 +348,7 @@ k = constant
 ```
 
 **Price calculation:**
+
 ```
 Price of YES = USDC_yes / (USDC_yes + USDC_no)
 Price of NO = USDC_no / (USDC_yes + USDC_no)
@@ -337,6 +357,7 @@ Always: Price_yes + Price_no = 1.0
 ```
 
 **Token output calculation:**
+
 ```
 Given USDC input (dx):
 dy = (y * dx) / (x + dx)
@@ -349,21 +370,22 @@ dx = USDC input
 ```
 
 **Fee structure:**
+
 - Trading fee: 0.3% (30 bps)
 - Fees accrue to liquidity providers
 - Deducted from input amount before swap calculation
 
 ### Smart Contract Instructions
 
-| Instruction | Parameters | Access Control |
-|-------------|------------|----------------|
-| `create_market` | question, description, end_time, resolve_time, initial_liquidity | Any user with sufficient USDC |
-| `trade` | side (Yes/No), amount_in, min_amount_out | Any user, market must be Open |
-| `add_liquidity` | side, usdc_amount | Any user, market must be Open |
-| `remove_liquidity` | side, lp_amount | LP token holder |
-| `lock_market` | - | Anyone, when end_time reached |
-| `resolve_market` | result (Yes/No) | Oracle only |
-| `claim_winnings` | - | Winning token holder |
+| Instruction        | Parameters                                                       | Access Control                |
+| ------------------ | ---------------------------------------------------------------- | ----------------------------- |
+| `create_market`    | question, description, end_time, resolve_time, initial_liquidity | Any user with sufficient USDC |
+| `trade`            | side (Yes/No), amount_in, min_amount_out                         | Any user, market must be Open |
+| `add_liquidity`    | side, usdc_amount                                                | Any user, market must be Open |
+| `remove_liquidity` | side, lp_amount                                                  | LP token holder               |
+| `lock_market`      | -                                                                | Anyone, when end_time reached |
+| `resolve_market`   | result (Yes/No)                                                  | Oracle only                   |
+| `claim_winnings`   | -                                                                | Winning token holder          |
 
 ## Success Criteria
 
@@ -395,17 +417,20 @@ dx = USDC input
 ## Technical Considerations
 
 ### Dependencies
+
 - Solana mainnet availability and performance
 - Anchor framework for smart contract development
 - SPL Token program for token management
 - Wallet adapter compatibility (Phantom, Solflare)
 
 ### Constraints
+
 - Solana transaction size limits
 - Maximum slippage tolerance for large trades
 - Oracle multisig availability for resolution
 
 ### Assumptions
+
 - Solana mainnet maintains < 1 second block times
 - USDC availability on Solana
 - Users have basic wallet operation knowledge
@@ -413,19 +438,20 @@ dx = USDC input
 
 ### Risks and Mitigation
 
-| Risk | Impact | Probability | Mitigation |
-|------|--------|-------------|------------|
-| Oracle manipulation | High | Medium | Use 3-of-5 multisig, plan dispute mechanism for v2 |
-| Low liquidity kills markets | High | High | Set minimum liquidity requirement (100 USDC), incentivize LPs |
-| Smart contract bug | Critical | Low | Audit, testnet testing, start with low limits |
-| Poor UX -> no adoption | High | Medium | User testing, clear error messages, tutorials |
-| Solana network congestion | Medium | Low | Implement retry logic, show clear pending states |
+| Risk                        | Impact   | Probability | Mitigation                                                    |
+| --------------------------- | -------- | ----------- | ------------------------------------------------------------- |
+| Oracle manipulation         | High     | Medium      | Use 3-of-5 multisig, plan dispute mechanism for v2            |
+| Low liquidity kills markets | High     | High        | Set minimum liquidity requirement (100 USDC), incentivize LPs |
+| Smart contract bug          | Critical | Low         | Audit, testnet testing, start with low limits                 |
+| Poor UX -> no adoption      | High     | Medium      | User testing, clear error messages, tutorials                 |
+| Solana network congestion   | Medium   | Low         | Implement retry logic, show clear pending states              |
 
 ## Testing Requirements
 
 ### Smart Contract Tests
 
 **Unit Tests:**
+
 - Market creation
 - Pool initialization
 - AMM calculations
@@ -433,12 +459,14 @@ dx = USDC input
 - Access control
 
 **Integration Tests:**
+
 - Full trade flow
 - Liquidity provision and removal
 - Resolution and payout
 - Edge cases (zero liquidity, dust amounts)
 
 **Scenario Tests:**
+
 - Multiple traders in same market
 - LP providing then removing liquidity
 - Market that resolves YES vs NO
@@ -447,18 +475,20 @@ dx = USDC input
 ### Frontend Tests
 
 **Component Tests:**
+
 - Form validation
 - Wallet connection
 - Transaction signing
 - Error handling
 
 **E2E Tests:**
+
 - Create market -> Trade -> Resolve -> Claim
 - Add liquidity -> Remove liquidity
 
 ## Undetermined Items
 
-*No undetermined items - all questions resolved:*
+_No undetermined items - all questions resolved:_
 
 1. **Oracle design**: Multisig for MVP, integrate Chainlink in v2
 2. **Market creation fee**: Minimum liquidity only (100 USDC)

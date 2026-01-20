@@ -1,29 +1,35 @@
 # Task: AMM Calculation Unit Tests
 
 Metadata:
+
 - Dependencies: task-07 (trade instruction with AMM utils)
 - Provides: Comprehensive AMM test coverage
 - Size: Small (1-2 files)
 
 ## Implementation Content
+
 Write comprehensive unit tests for AMM calculations:
+
 - Constant product formula validation
 - Fee deduction accuracy
 - Edge cases (small amounts, large amounts)
 - Price calculation accuracy
 
 ## Target Files
+
 - [ ] `anchor/programs/prediction/src/utils/amm.rs` (add tests module)
 - [ ] Or separate test file if preferred
 
 ## Implementation Steps (TDD: Red-Green-Refactor)
 
 ### 1. Red Phase
+
 - [ ] Write test cases for calculate_output function
 - [ ] Write test cases for price calculation
 - [ ] Identify edge cases
 
 ### 2. Green Phase
+
 - [ ] Implement comprehensive tests:
 
 ```rust
@@ -87,17 +93,20 @@ mod tests {
 ```
 
 ### 3. Refactor Phase
+
 - [ ] Add more edge case tests
 - [ ] Add documentation for expected behavior
 - [ ] Run `cargo test` and ensure all pass
 
 ## Completion Criteria
+
 - [ ] All AMM calculation tests pass
 - [ ] Edge cases covered (small, large, zero)
 - [ ] Overflow protection verified
 - [ ] Operation verified: L2 (tests pass)
 
 ## Notes
+
 - Impact scope: Validates trading accuracy
-- Formula: dy = (y * dx * (10000 - fee)) / (x * 10000 + dx * (10000 - fee))
+- Formula: dy = (y _ dx _ (10000 - fee)) / (x _ 10000 + dx _ (10000 - fee))
 - Use u128 for intermediate calculations

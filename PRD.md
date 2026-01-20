@@ -1,4 +1,5 @@
 # Product Requirements Document (PRD)
+
 ## Solana Decentralized Prediction Market - MVP
 
 ---
@@ -8,6 +9,7 @@
 Build a **trustless, permissionless prediction market** on Solana where users can create binary (Yes/No) markets, trade positions, and receive automatic payouts based on oracle-resolved outcomes.
 
 **Core Value Proposition:**
+
 - No custody - users control funds via wallet
 - No KYC/geographical restrictions
 - Automatic settlement via smart contracts
@@ -18,12 +20,14 @@ Build a **trustless, permissionless prediction market** on Solana where users ca
 ## 2. Product Goals
 
 ### Primary Goals
+
 1. Enable anyone to create a binary prediction market
 2. Provide instant trading via AMM (no orderbook matching delays)
 3. Ensure trustless, automatic payouts upon resolution`
 4. Maintain low transaction costs (<$0.01 per trade)
 
 ### Non-Goals (Out of Scope for MVP)
+
 - Governance tokens or DAO
 - Multi-outcome markets (only Yes/No)
 - Dispute resolution mechanism
@@ -37,16 +41,19 @@ Build a **trustless, permissionless prediction market** on Solana where users ca
 ## 3. User Personas
 
 ### Persona 1: Market Creator
+
 - Wants to create prediction markets on topics they care about
 - Willing to provide initial liquidity
 - Expects fair oracle resolution
 
 ### Persona 2: Trader
+
 - Wants to bet on outcomes
 - Expects clear pricing and instant execution
 - Wants to withdraw winnings without friction
 
 ### Persona 3: Liquidity Provider
+
 - Wants to earn fees from trading activity
 - Willing to take on market-making risk
 - Expects transparent LP token accounting
@@ -58,20 +65,24 @@ Build a **trustless, permissionless prediction market** on Solana where users ca
 ### 4.1 Technology Stack
 
 **Blockchain:**
+
 - Solana mainnet
 - Anchor framework for smart contracts
 
 **Smart Contracts:**
+
 - Rust/Anchor program for core logic
 - SPL Token program for YES/NO tokens
 
 **Frontend:**
+
 - React + TypeScript
 - @solana/web3.js
 - @project-serum/anchor
 - Wallet adapter (Phantom, Solflare)
 
 **Backend (Optional for MVP):**
+
 - Simple indexer for market discovery
 - Could be replaced by on-chain queries initially
 
@@ -102,21 +113,21 @@ pub struct Market {
     pub description: String,        // Max 1000 chars
     pub creator: Pubkey,            // Market creator
     pub oracle: Pubkey,             // Resolution authority
-    
+
     pub end_time: i64,              // Unix timestamp - trading ends
     pub resolve_time: i64,          // Expected resolution time
-    
+
     pub yes_mint: Pubkey,           // YES token mint
     pub no_mint: Pubkey,            // NO token mint
-    
+
     pub yes_pool: Pubkey,           // YES AMM pool
     pub no_pool: Pubkey,            // NO AMM pool
-    
+
     pub vault_usdc: Pubkey,         // USDC vault
-    
+
     pub status: MarketStatus,       // Open | Locked | Resolved
     pub result: MarketResult,       // Undecided | Yes | No
-    
+
     pub total_liquidity: u64,       // Total USDC locked
     pub created_at: i64,            // Creation timestamp
 }
@@ -140,13 +151,13 @@ pub enum MarketResult {
 pub struct Pool {
     pub market: Pubkey,             // Parent market
     pub side: PoolSide,             // Yes or No
-    
+
     pub usdc_reserve: u64,          // USDC in pool
     pub token_reserve: u64,         // YES/NO tokens in pool
-    
+
     pub lp_mint: Pubkey,            // LP token mint
     pub total_lp_supply: u64,       // Total LP tokens
-    
+
     pub fee_bps: u16,               // Fee in basis points (e.g., 30 = 0.3%)
     pub collected_fees: u64,        // Accumulated fees
 }
@@ -166,10 +177,12 @@ pub enum PoolSide {
 **Actor:** Market Creator
 
 **Preconditions:**
+
 - User has connected Solana wallet
 - User has sufficient USDC for initial liquidity (minimum 100 USDC)
 
 **Steps:**
+
 1. User fills market creation form:
    - Question (required)
    - Description (optional)
@@ -192,11 +205,13 @@ pub enum PoolSide {
 4. Market goes live immediately
 
 **Success Criteria:**
+
 - Market is visible in market list
 - Initial price for both YES/NO is ~50%
 - Creator receives LP tokens
 
 **Error Cases:**
+
 - Insufficient USDC → Show error, don't execute
 - Invalid timestamps → Reject transaction
 - Duplicate market → Allow (no uniqueness constraint in MVP)
@@ -208,11 +223,13 @@ pub enum PoolSide {
 **Actor:** Trader
 
 **Preconditions:**
+
 - Market status = Open
 - Current time < end_time
 - User has USDC
 
 **Steps:**
+
 1. User selects market
 2. User chooses YES or NO
 3. User enters USDC amount to spend
@@ -230,11 +247,13 @@ pub enum PoolSide {
    - Update pool reserves
 
 **Success Criteria:**
+
 - User receives expected tokens (±0.1% slippage tolerance)
 - Pool reserves updated correctly
 - Transaction cost < $0.01
 
 **Error Cases:**
+
 - Slippage too high → Show warning, allow override
 - Insufficient USDC → Reject with clear message
 - Market locked → Disable trade button
@@ -246,10 +265,12 @@ pub enum PoolSide {
 **Actor:** Liquidity Provider
 
 **Preconditions:**
+
 - Market status = Open
 - User has USDC
 
 **Steps:**
+
 1. User selects "Add Liquidity"
 2. User chooses pool (YES or NO)
 3. User enters USDC amount
@@ -266,6 +287,7 @@ pub enum PoolSide {
    - Mint LP tokens to user
 
 **Success Criteria:**
+
 - User receives LP tokens
 - Pool reserves increase proportionally
 
@@ -276,10 +298,12 @@ pub enum PoolSide {
 **Actor:** Oracle (Multisig)
 
 **Preconditions:**
+
 - Market status = Locked
 - Current time >= resolve_time
 
 **Steps:**
+
 1. Oracle determines real-world outcome
 2. Oracle calls `resolve_market` instruction
 3. Passes market ID and result (Yes/No)
@@ -290,6 +314,7 @@ pub enum PoolSide {
    - Emit resolution event
 
 **Success Criteria:**
+
 - Market result is set
 - Payouts become available
 
@@ -300,10 +325,12 @@ pub enum PoolSide {
 **Actor:** Winning Trader
 
 **Preconditions:**
+
 - Market status = Resolved
 - User holds winning tokens (YES if result=Yes, NO if result=No)
 
 **Steps:**
+
 1. User clicks "Claim Winnings"
 2. UI shows claimable amount
 3. User confirms
@@ -312,6 +339,7 @@ pub enum PoolSide {
    - Transfer equivalent USDC to user (1 token = 1 USDC)
 
 **Success Criteria:**
+
 - User receives USDC
 - Tokens are burned
 
@@ -333,6 +361,7 @@ k = constant
 ```
 
 **Price calculation:**
+
 ```
 Price of YES = USDC_yes / (USDC_yes + USDC_no)
 Price of NO = USDC_no / (USDC_yes + USDC_no)
@@ -341,6 +370,7 @@ Always: Price_yes + Price_no ≈ 1.0
 ```
 
 **Token output calculation:**
+
 ```
 Given USDC input (dx):
 dy = (y * dx) / (x + dx)
@@ -353,6 +383,7 @@ dx = USDC input
 ```
 
 **Fee structure:**
+
 - Trading fee: 0.3% (30 bps)
 - Fees accrue to liquidity providers
 - Deducted from input amount before swap calculation
@@ -360,6 +391,7 @@ dx = USDC input
 ### 7.2 Smart Contract Instructions
 
 **create_market**
+
 ```rust
 pub fn create_market(
     ctx: Context<CreateMarket>,
@@ -372,6 +404,7 @@ pub fn create_market(
 ```
 
 **trade**
+
 ```rust
 pub fn trade(
     ctx: Context<Trade>,
@@ -382,6 +415,7 @@ pub fn trade(
 ```
 
 **add_liquidity**
+
 ```rust
 pub fn add_liquidity(
     ctx: Context<AddLiquidity>,
@@ -391,6 +425,7 @@ pub fn add_liquidity(
 ```
 
 **remove_liquidity**
+
 ```rust
 pub fn remove_liquidity(
     ctx: Context<RemoveLiquidity>,
@@ -400,6 +435,7 @@ pub fn remove_liquidity(
 ```
 
 **lock_market**
+
 ```rust
 pub fn lock_market(
     ctx: Context<LockMarket>,
@@ -408,6 +444,7 @@ pub fn lock_market(
 ```
 
 **resolve_market**
+
 ```rust
 pub fn resolve_market(
     ctx: Context<ResolveMarket>,
@@ -417,6 +454,7 @@ pub fn resolve_market(
 ```
 
 **claim_winnings**
+
 ```rust
 pub fn claim_winnings(
     ctx: Context<ClaimWinnings>,
@@ -427,11 +465,13 @@ pub fn claim_winnings(
 ### 7.3 Security Requirements
 
 **Access Controls:**
+
 - Only oracle can resolve markets
 - Anyone can lock market after end_time
 - Market creator has no special privileges post-creation
 
 **Validation:**
+
 - end_time must be in future
 - resolve_time must be after end_time
 - Slippage checks on all trades
@@ -439,6 +479,7 @@ pub fn claim_winnings(
 - Prevent double-resolution
 
 **Economic Security:**
+
 - Minimum liquidity: 100 USDC
 - Maximum slippage: 5% default (user can override)
 - No market creator fee (for MVP)
@@ -450,6 +491,7 @@ pub fn claim_winnings(
 ### 8.1 Market List Page
 
 **Components:**
+
 - Search/filter markets
 - Sort by: ending soon, highest volume, newest
 - Market cards showing:
@@ -462,6 +504,7 @@ pub fn claim_winnings(
 ### 8.2 Market Detail Page
 
 **Components:**
+
 - Question and description
 - Price chart (YES/NO over time)
 - Trading interface:
@@ -479,6 +522,7 @@ pub fn claim_winnings(
 ### 8.3 Portfolio Page
 
 **Components:**
+
 - Active positions (markets you've traded)
 - LP positions
 - Claimable winnings
@@ -487,6 +531,7 @@ pub fn claim_winnings(
 ### 8.4 Create Market Page
 
 **Form fields:**
+
 - Question (textarea)
 - Description (textarea)
 - End date/time (datetime picker)
@@ -501,6 +546,7 @@ pub fn claim_winnings(
 ### 9.1 Smart Contract Tests
 
 **Unit Tests:**
+
 - Market creation
 - Pool initialization
 - AMM calculations
@@ -508,12 +554,14 @@ pub fn claim_winnings(
 - Access control
 
 **Integration Tests:**
+
 - Full trade flow
 - Liquidity provision and removal
 - Resolution and payout
 - Edge cases (zero liquidity, dust amounts)
 
 **Scenario Tests:**
+
 - Multiple traders in same market
 - LP providing then removing liquidity
 - Market that resolves YES vs NO
@@ -522,12 +570,14 @@ pub fn claim_winnings(
 ### 9.2 Frontend Tests
 
 **Component Tests:**
+
 - Form validation
 - Wallet connection
 - Transaction signing
 - Error handling
 
 **E2E Tests:**
+
 - Create market → Trade → Resolve → Claim
 - Add liquidity → Remove liquidity
 
@@ -536,6 +586,7 @@ pub fn claim_winnings(
 ## 10. Launch Criteria
 
 ### Must Have (Blockers)
+
 - [ ] Smart contracts deployed to mainnet
 - [ ] Contracts audited (at minimum: internal review)
 - [ ] Frontend can create markets
@@ -545,6 +596,7 @@ pub fn claim_winnings(
 - [ ] Basic error handling
 
 ### Should Have (High Priority)
+
 - [ ] Market search/filter
 - [ ] Price charts
 - [ ] Transaction history
@@ -552,6 +604,7 @@ pub fn claim_winnings(
 - [ ] Slippage protection
 
 ### Nice to Have (Post-MVP)
+
 - [ ] Market categories/tags
 - [ ] Share market links
 - [ ] Email notifications for resolution
@@ -574,6 +627,7 @@ pub fn claim_winnings(
 ## 12. Success Metrics
 
 **MVP Success (30 days post-launch):**
+
 - 50+ markets created
 - 500+ trades executed
 - $10,000+ total value locked
@@ -581,6 +635,7 @@ pub fn claim_winnings(
 - 10+ active liquidity providers
 
 **Growth Metrics (3 months):**
+
 - 500+ markets
 - 5,000+ unique wallets
 - $100,000+ TVL
@@ -591,23 +646,27 @@ pub fn claim_winnings(
 ## 13. Development Phases
 
 ### Phase 1: Smart Contracts (Weeks 1-3)
+
 - Set up Anchor project
 - Implement core instructions
 - Write tests
 - Deploy to devnet
 
 ### Phase 2: Frontend Shell (Weeks 2-4)
+
 - Set up React app
 - Wallet integration
 - Basic UI components
 - Connect to devnet
 
 ### Phase 3: Integration (Weeks 4-5)
+
 - Wire frontend to contracts
 - End-to-end testing
 - Bug fixes
 
 ### Phase 4: Polish & Launch (Week 6)
+
 - UI/UX improvements
 - Documentation
 - Deploy to mainnet
